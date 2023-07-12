@@ -26,6 +26,7 @@ import java.util.List;
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
     private String packageName = "co.com.bancolombia.certificacion";
     private ProjectType type = ProjectType.UX;
+    private String aplicationName = "";
     private String name = "ScreenPlayArchitecture";
     private BooleanOption lombok = BooleanOption.TRUE;
     private BooleanOption force = BooleanOption.FALSE;
@@ -34,6 +35,9 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
 
     @Option(option = "package", description = "Set principal package to use in the project")
     public void setPackageName(String packageName) { this.packageName = this.packageName + packageName; }
+
+    /*@Option(option = "aplicationName", description = "Set application name or MAC")
+    public void aplicationName(String aplicationName) { this.aplicationName = aplicationName; }*/
 
     @Option(option = "type", description = "Set project type to implement")
     public void setType(ProjectType type) { this.type = type; }
@@ -75,7 +79,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         logger.lifecycle("Package: {}" , packageName);
         logger.lifecycle("Project type: {}" , type);
         logger.lifecycle("Java Version: {}" , javaVersion);
-        logger.lifecycle("Project Name:: {}" , name);
+        logger.lifecycle("Project Name: {}" , name);
         builder.addParamPackage(packageName);
         builder.addParam("projectName", name);
         builder.addParam("lombok", lombok == BooleanOption.TRUE);
@@ -89,5 +93,6 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         }else{
             builder.setupFromTemplate("structure");
         }
+        builder.persist();
     }
 }

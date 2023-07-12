@@ -1,11 +1,14 @@
 package co.com.bancolombia.utils;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import com.github.mustachejava.resolver.DefaultResolver;
 import org.apache.commons.io.IOUtils;
+import org.gradle.api.Project;
 
 public class FileUtil {
 
@@ -30,5 +33,13 @@ public class FileUtil {
             return path;
         }
         return "./" + path;
+    }
+
+    public static void writeString(Project project, String filePath, String content) throws IOException{
+        project.getLogger().debug(project.file(filePath).getAbsolutePath());
+        File file = project.file(filePath).getAbsoluteFile();
+        try (FileWriter fileWriter = new FileWriter(file)){
+            fileWriter.write(content);
+        }
     }
 }
