@@ -23,7 +23,7 @@ public class Constants {
         UX
     }
 
-    public static final String PLUGIN_VERSION = "3.4.0";
+    public static final String PLUGIN_VERSION = "1.0.0";
     public static final String BUILD_GRADLE = "./build.gradle";
 
 

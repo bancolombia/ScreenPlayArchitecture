@@ -1,17 +1,20 @@
 {
   "folders": [
-    "scr/main/{{language}}/{{packageName}}/{{name}}/exceptions/exception",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/integrations/query",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/interactions/interaction",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/models/model",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/questions/question",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/tasks/task",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/userinterfaces/userinterface",
-    "scr/main/{{language}}/{{packageName}}/{{name}}/utils/util"
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/exceptions/exception",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/integrations/query",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/interactions/interaction",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/models/model",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/questions/question",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/tasks/task",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/userinterfaces/userinterface",
+    "src/main/{{language}}/{{packagePath}}/{{projectName}}/utils/util"
   ],
   "java" : {
     "structure/root/build.gradle.mustache": "build.gradle",
     "structure/root/settings.gradle.mustache": "settings.gradle",
     "structure/root/serenity.properties.mustache": "serenity.properties"
+  },
+  "files" : {
+
   }
 }

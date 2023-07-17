@@ -46,12 +46,14 @@ public class ModuleBuilder {
     private final Logger logger;
     public static final String LATEST_RELEASE = "latestRelease";
 
-
-
-
     public ModuleBuilder(Project project){
         this.project = project;
         this.logger = getProject().getLogger();
+        initialize();
+    }
+
+    private void initialize(){
+        params.put("projectName", getProject().getName());
 
     }
 
@@ -75,13 +77,18 @@ public class ModuleBuilder {
         this.files.put(finalPath, FileModel.builder().path(finalPath).content(content).build());
     }
 
+    public String getStringParam(String key) {
+        return (String) params.get(key);
+    }
+
     public void setupFromTemplate(String resourceGroup) throws IOException, ParamNotFoundException {
         TemplateDefinition templateDefinition = loadTemplateDefinition(resourceGroup);
 
         for (String folder : templateDefinition.getFolders()){
             addDir(Util.fillPath(folder, params));
+
         }
-        Map<String, String> projectFiles = new HashMap<>(templateDefinition.getFiles());
+        /*Map<String, String> projectFiles = new HashMap<>(templateDefinition.getFiles());
         projectFiles.putAll(templateDefinition.getJava());
 
         for (Map.Entry<String, String> fileEntry : projectFiles.entrySet()){
@@ -89,7 +96,7 @@ public class ModuleBuilder {
             String content = buildFromTemplate(fileEntry.getKey());
             addDir(Util.extractDir(path));
             addFile(path, content);
-        }
+        }*/
     }
 
     public void persist() throws IOException{

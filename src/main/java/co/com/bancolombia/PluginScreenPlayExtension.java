@@ -3,7 +3,7 @@ package co.com.bancolombia;
 import org.gradle.api.Action;
 import org.gradle.api.tasks.Nested;
 
-public interface ScreenPluginExtension {
+public interface PluginScreenPlayExtension {
 
     @Nested
     ModelProps getModelsProps();

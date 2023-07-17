@@ -18,7 +18,7 @@ public class ReflectionUtils {
   }
 
   public static Stream<Class<? extends Task>> getTasks() {
-    return new Reflections("co.com.bancolombia.task", Scanners.TypesAnnotated)
+    return new Reflections("co.com.bancolombia.tasks", Scanners.TypesAnnotated)
         .getTypesAnnotatedWith(CATask.class).stream()
             .filter(Task.class::isAssignableFrom)
             .map(c -> c.asSubclass(Task.class));

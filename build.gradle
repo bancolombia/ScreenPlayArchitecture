@@ -1,9 +1,52 @@
+
 plugins {
     id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.0'
+
+}
+
+ext {
+    bcRepo = ''
+    bcPluginName = 'Scaffold ScreanPlay Architecture Bancolombia'
+    bcPluginDescription = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
+}
+
+group = 'co.com.bancolombia.screenPlayArchitecture'
+version = '1.0.0'
+
+
+publishing {
+    publications {
+        mavenPlugin(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
 
 repositories {
     mavenCentral()
+}
+
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        cleanArchitecture {
+            id = 'co.com.bancolombia.screenPlayArchitecture'
+            displayName = bcPluginName
+            description = bcPluginDescription
+            implementationClass = 'co.com.bancolombia.PluginScreenPlay'
+            //tags.set(['scaffold', 'cleanArchitecture', 'Bancolombia', 'OpenSource'])
+        }
+    }
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {

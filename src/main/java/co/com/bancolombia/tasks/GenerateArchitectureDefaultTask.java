@@ -19,14 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @CATask(
-        name = "screanPlayArchitecture",
+        name = "screenPlayArchitecture",
         shortCut = "spa",
-        description = "Scaffolding ScreanPlay architecture project"
+        description = "Scaffolding ScreePlay architecture project"
 )
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
     private String packageName = "co.com.bancolombia.certificacion";
     private ProjectType type = ProjectType.UX;
-    private String aplicationName = "";
     private String name = "ScreenPlayArchitecture";
     private BooleanOption lombok = BooleanOption.TRUE;
     private BooleanOption force = BooleanOption.FALSE;
@@ -60,7 +59,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     }
 
 
-    @OptionValues("lombok")
+    /*@OptionValues("lombok")
     public List<BooleanOption> getLombok(BooleanOption lombok) { return Arrays.asList(BooleanOption.values());
     }
 
@@ -71,7 +70,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     public List<JavaVersion> getJavaVersion(JavaVersion javaVersion) { return Arrays.asList(JavaVersion.values()); }
 
     @OptionValues("force")
-    public List<BooleanOption> getForce(BooleanOption force) { return Arrays.asList(BooleanOption.values()); }
+    public List<BooleanOption> getForce(BooleanOption force) { return Arrays.asList(BooleanOption.values()); }*/
 
     @Override
     public void execute() throws IOException, ScreenPlayException {
@@ -90,7 +89,6 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), BUILD_GRADLE);
         if (exists && force == BooleanOption.FALSE){
             logger.lifecycle("Another project was found in the same directory, rewriting exist files ");
-        }else{
             builder.setupFromTemplate("structure");
         }
         builder.persist();

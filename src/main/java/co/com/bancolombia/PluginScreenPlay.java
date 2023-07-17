@@ -1,33 +1,36 @@
 package co.com.bancolombia;
 
 import co.com.bancolombia.models.TaskModel;
+import co.com.bancolombia.tasks.ValidateStructureTask;
 import co.com.bancolombia.tasks.annotations.CATask;
 import co.com.bancolombia.utils.ReflectionUtils;
+import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.testing.Test;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
 public class PluginScreenPlay implements Plugin<Project> {
-    private ScreenPluginExtension screenPluginExtension;
+    private PluginScreenPlayExtension pluginScreenPlayExtension;
 
     @Override
     public void apply(Project project) {
         project.getPluginManager().apply("java");
-        screenPluginExtension = project.getExtensions().create("ScreenPlugin", ScreenPluginExtension.class);
+        pluginScreenPlayExtension = project.getExtensions().create("PluginScreenPlay", PluginScreenPlayExtension.class);
 
         TaskContainer taskContainer = project.getTasks();
         initTask().forEach(task -> this.appendTask(taskContainer, task));
 
         project.getSubprojects().forEach(this::listenTest);
 
-        taskContainer
+        /*taskContainer
                 .getByName("compileJava")
                 .getDependsOn()
-                .add(taskContainer.getByName("ValidateStructure"));
+                .add(taskContainer.getByName("ValidateStructure"));*/
     }
 
     private Stream<TaskModel> initTask() {
@@ -55,6 +58,13 @@ public class PluginScreenPlay implements Plugin<Project> {
                                         test.getLogger().lifecycle(testOutputEvent.getMessage()
                                                 .replace('\n', ' '));
                                     }}));
+    }
+
+    @NotNull
+    private Action<? extends ValidateStructureTask> buildValidateStructureTaskAction() {
+        return task ->
+                task.getWhiteListedDependencies()
+                        .set(pluginScreenPlayExtension.getModelsProps().getWhiteListedDependencies());
     }
 
     @SuppressWarnings("unchecked")

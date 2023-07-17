@@ -1,6 +1,7 @@
 package co.com.bancolombia.utils;
 
 import co.com.bancolombia.exceptions.ParamNotFoundException;
+import org.gradle.api.logging.Logger;
 
 import java.util.Map;
 
@@ -31,10 +32,11 @@ public class Util {
     }
 
     public static String fillPath(String path, Map<String, Object> params) throws ParamNotFoundException{
+
         while (path.contains(PARAM_START)) {
             String key = path.substring(path.indexOf(PARAM_START) + PARAM_LENGTH, path.indexOf(PARAM_END));
             if (params.containsKey(key)) {
-                path = path.replace(PARAM_END + key + PARAM_END, params.get(key).toString());
+                path = path.replace(PARAM_START + key + PARAM_END, params.get(key).toString());
             }else {
                 throw new ParamNotFoundException(key);
             }
