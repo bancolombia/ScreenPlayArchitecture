@@ -105,13 +105,15 @@ public class ModuleBuilder {
         styledLogger
                 .style(StyledTextOutput.Style.Header)
                 .append("Files: ")
-                .style(StyledTextOutput.Style.Success)
+                .style(Success)
                 .append(Integer.toString(files.size()))
-                .style(StyledTextOutput.Style.Header)
+                .style(Header)
                 .append(", dirs: ")
-                .style(StyledTextOutput.Style.Success)
+                .style(Success)
+                .append(Integer.toString(dirs.size()))
+                .style(Header)
                 .append(", deleted dirs; ")
-                .style(StyledTextOutput.Style.Success)
+                .style(Success)
                 .append(Integer.toString(dirsToDelete.size()))
                 .println();
 

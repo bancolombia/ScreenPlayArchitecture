@@ -11,12 +11,9 @@ import static co.com.bancolombia.utils.Constants.BUILD_GRADLE;
 import co.com.bancolombia.utils.FileUtil;
 import co.com.bancolombia.utils.Util;
 import org.gradle.api.tasks.options.Option;
-import org.gradle.api.tasks.options.OptionValues;
 
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 @CATask(
         name = "screenPlayArchitecture",
@@ -51,8 +48,8 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     @Option(option = "language", description = "Set code language project, by default is Java")
     public void language(Language language) { this.language = language; }
 
-    /*@Option(option = "javaVersion", description = "Set Java version")
-    public void javaVersion(int javaVersion) { this.javaVersion = javaVersion; }*/
+    @Option(option = "javaVersion", description = "Set Java version")
+    public void javaVersion(String javaVersion) { this.javaVersion = Integer.parseInt(javaVersion); }
 
     @Option(option = "force", description = "Force regenerates all files")
     public void setForce(BooleanOption force) {
@@ -86,8 +83,14 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addParam("principalPackage", principalPackage);
         builder.addParam("lombok", lombok == BooleanOption.TRUE);
         builder.addParam("language", language.name().toLowerCase());
-        builder.addParam("javaVersion", javaVersion == Constants.Java11);
+        builder.addParam("javaVersion", javaVersion);
         builder.addParam("java11", javaVersion == Constants.Java11);
+        builder.addParam("remoteRepository", Constants.BANCOLOMBIA_REPOSITORIES);
+        builder.addParam("serenityV", Constants.SERENITY_VERSION);
+        builder.addParam("cucumberV",Constants.SERENITY_CUCUMBER_VERSION);
+        builder.addParam("lombookV", Constants.LOMBOK_VERSION);
+        builder.addParam("junitV", Constants.JUNIT);
+        builder.addParam("hamcrestV", Constants.HAMCREST);
 
         Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), BUILD_GRADLE);
         if (exists && force == BooleanOption.FALSE){
