@@ -2,8 +2,8 @@ package co.com.bancolombia.tasks;
 
 import co.com.bancolombia.exceptions.ScreenPlayException;
 import co.com.bancolombia.tasks.annotations.CATask;
+import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.Constants.ProjectType;
-import co.com.bancolombia.utils.Constants.JavaVersion;
 import co.com.bancolombia.utils.Constants.Language;
 import co.com.bancolombia.utils.Constants.BooleanOption;
 import static co.com.bancolombia.utils.Constants.BUILD_GRADLE;
@@ -24,25 +24,26 @@ import java.util.List;
         description = "Scaffolding ScreePlay architecture project"
 )
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
-    private String packageName = "co.com.bancolombia.certificacion";
+    private String groupId = "co.com.bancolombia.certificacion";
     private ProjectType type = ProjectType.UX;
-    private String name = "ScreenPlayArchitecture";
+    private String projectName = "screenplayarchitecture";
+    private String principalPackage = "prueba";
     private BooleanOption lombok = BooleanOption.TRUE;
     private BooleanOption force = BooleanOption.FALSE;
     private Language language = Language.JAVA;
-    private JavaVersion javaVersion = JavaVersion.VERSION_11;
+    private int javaVersion = Constants.Java11;
 
-    @Option(option = "package", description = "Set principal package to use in the project")
-    public void setPackageName(String packageName) { this.packageName = this.packageName + packageName; }
+    @Option(option = "groupId", description = "Set group id to use in the project")
+    public void setgroupId(String groupId) { this.groupId = this.groupId; }
 
-    /*@Option(option = "aplicationName", description = "Set application name or MAC")
-    public void aplicationName(String aplicationName) { this.aplicationName = aplicationName; }*/
+    @Option(option = "principalPackage", description = "Set name principal package on project")
+    public void principalPackage(String principalPackage) { this.principalPackage = principalPackage; }
 
     @Option(option = "type", description = "Set project type to implement")
     public void setType(ProjectType type) { this.type = type; }
 
-    @Option(option = "name", description = "Set project name, by default is ScreenPlayArchitecture")
-    public void name(String name) { this.name = name; }
+    @Option(option = "projectName", description = "Set project name, by default is ScreenPlayArchitecture")
+    public void name(String projectName) { this.projectName = projectName; }
 
     @Option(option = "lombok", description = "Switch the status of lombok in this project")
     public void lombok(BooleanOption lombok) { this.lombok = lombok; }
@@ -50,8 +51,8 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     @Option(option = "language", description = "Set code language project, by default is Java")
     public void language(Language language) { this.language = language; }
 
-    @Option(option = "javaVersion", description = "Set Java version")
-    public void javaVersion(JavaVersion javaVersion) { this.javaVersion = javaVersion; }
+    /*@Option(option = "javaVersion", description = "Set Java version")
+    public void javaVersion(int javaVersion) { this.javaVersion = javaVersion; }*/
 
     @Option(option = "force", description = "Force regenerates all files")
     public void setForce(BooleanOption force) {
@@ -75,16 +76,18 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     @Override
     public void execute() throws IOException, ScreenPlayException {
         logger.lifecycle("ScreenPlay architecture plugin version: {}" , Util.getVersionPlugin());
-        logger.lifecycle("Package: {}" , packageName);
+        logger.lifecycle("Project Name: {}" , projectName);
+        logger.lifecycle("Group id: {}" , groupId);
+        logger.lifecycle("Principal Package: {}" , principalPackage);
         logger.lifecycle("Project type: {}" , type);
         logger.lifecycle("Java Version: {}" , javaVersion);
-        logger.lifecycle("Project Name: {}" , name);
-        builder.addParamPackage(packageName);
-        builder.addParam("projectName", name);
+        builder.addGroupId(groupId);
+        builder.addParam("projectName", projectName);
+        builder.addParam("principalPackage", principalPackage);
         builder.addParam("lombok", lombok == BooleanOption.TRUE);
         builder.addParam("language", language.name().toLowerCase());
-        builder.addParam("javaVersion", javaVersion);
-        builder.addParam("java11", javaVersion == JavaVersion.VERSION_11);
+        builder.addParam("javaVersion", javaVersion == Constants.Java11);
+        builder.addParam("java11", javaVersion == Constants.Java11);
 
         Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), BUILD_GRADLE);
         if (exists && force == BooleanOption.FALSE){

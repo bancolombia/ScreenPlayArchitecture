@@ -57,9 +57,9 @@ public class ModuleBuilder {
 
     }
 
-    public void addParamPackage(String packageName) {
-        this.params.put("package", packageName.toLowerCase());
-        this.params.put("packagePath", packageName.replace('.', '/').toLowerCase());
+    public void addGroupId(String packageName) {
+        this.params.put("groupId", packageName.toLowerCase());
+        this.params.put("groupIdPath", packageName.replace('.', '/').toLowerCase());
     }
 
     public void addParam(String key, Object value) {
@@ -88,7 +88,7 @@ public class ModuleBuilder {
             addDir(Util.fillPath(folder, params));
 
         }
-        /*Map<String, String> projectFiles = new HashMap<>(templateDefinition.getFiles());
+        Map<String, String> projectFiles = new HashMap<>(templateDefinition.getFiles());
         projectFiles.putAll(templateDefinition.getJava());
 
         for (Map.Entry<String, String> fileEntry : projectFiles.entrySet()){
@@ -96,7 +96,7 @@ public class ModuleBuilder {
             String content = buildFromTemplate(fileEntry.getKey());
             addDir(Util.extractDir(path));
             addFile(path, content);
-        }*/
+        }
     }
 
     public void persist() throws IOException{

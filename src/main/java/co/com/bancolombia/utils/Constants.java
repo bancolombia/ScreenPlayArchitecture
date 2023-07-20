@@ -11,12 +11,7 @@ public class Constants {
         KOTLIN
     }
 
-    public enum JavaVersion {
-        @Deprecated
-        VERSION_1_8,
-        VERSION_11,
-        VERSION_17
-    }
+    public static final int Java11 = 11;
 
     public enum ProjectType {
         REST,
