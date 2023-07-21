@@ -1,6 +1,6 @@
 # Scaffolding of ScreenPlay Architecture
 
-Gradle plugin to create a java and kotlin application based on ScreenPlay Architecture following our best practices.
+Gradle plugin to create a java application based on ScreenPlay Architecture following our best practices.
 
 - [Scaffolding of ScreenPlay Architecture](#Scaffolding of ScreenPlay Architecture)
 - [Plugin Implementation](#plugin-implementation)
