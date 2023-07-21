@@ -23,8 +23,8 @@ import java.io.IOException;
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
     private String groupId = "co.com.bancolombia.certificacion";
     private ProjectType type = ProjectType.UX;
-    private String projectName = "screenplayarchitecture";
-    private String principalPackage = "prueba";
+    private String projectName = "Screenplay_architecture";
+    private String principalPackage = "screen";
     private BooleanOption lombok = BooleanOption.TRUE;
     private BooleanOption force = BooleanOption.FALSE;
     private Language language = Language.JAVA;

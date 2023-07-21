@@ -31,11 +31,50 @@ The Scaffolding ScreenPlay Architecture plugin will allow you run ? tasks:
 ## Generate Project
 
 The **`screenPlayArchitecture | spa`** task will generate a ScreenPlay architecture structure in your project, this task
-has ? optional parameters; `package` , `type` and `name`.
+has 3 optional parameters; `projectName` , `groupId` and `principalPackage`.
 If you run this task on an existing project it will override the `build.gradle` file.
+  - **`projectName`** `= ProjectName`: This parameter is going to specify name of the project. `Default value = Screenplay_architecture`
+  - **`groupId`** `= <your.company.domain>`: You can specify your domain, this parameter going to use for package structure. `Default value = co.com.bancolombia.certificacion`
+  - **`principalPackage`** `= package container`: This parameter going to like package container and is a complement for groupId. `Default value = screen`
 
 
 ```shell
-    gradle screenPlayArchitecture
-    gradle spa 
+gradle screenPlayArchitecture --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba
+gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba
 ```
+
+**_The structure will look like this for java:_**
+
+```bash
+   📦NameProject
+   ┣ 📂src
+   ┃ ┣ 📂main
+   ┃ ┃ ┗ 📂java
+   ┃ ┃   ┗ 📂co
+   ┃ ┃     ┗ 📂com
+   ┃ ┃       ┗ 📂bancolombia
+   ┃ ┃         ┗ 📂certificacion
+   ┃ ┃           ┗ 📂[principalPackage]
+   ┃ ┃             ┣ 📂exceptions
+   ┃ ┃             ┣ 📂integrations
+   ┃ ┃             ┣ 📂interactions
+   ┃ ┃             ┣ 📂models
+   ┃ ┃             ┣ 📂questions
+   ┃ ┃             ┣ 📂tasks
+   ┃ ┃             ┣ 📂userinterfaces
+   ┃ ┃             ┗ 📂utils
+   ┃ ┗ 📂test
+   ┃   ┣ 📂java
+   ┃   ┃ ┗ 📂co
+   ┃   ┃   ┗ 📂com
+   ┃   ┃     ┗ 📂bancolombia
+   ┃   ┃       ┗ 📂certificacion
+   ┃   ┃         ┗ 📂[principalPackage]
+   ┃   ┃           ┣ 📂runners
+   ┃   ┃           ┗ 📂stepdefinitions
+   ┃   ┗ 📂resources          
+   ┃     ┗ 📂features         
+   ┣ 📜build.gradle
+   ┗ 📜settings.gradle
+   ```
+
