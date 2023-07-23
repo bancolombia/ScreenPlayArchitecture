@@ -91,6 +91,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addParam("lombookV", Constants.LOMBOK_VERSION);
         builder.addParam("junitV", Constants.JUNIT);
         builder.addParam("hamcrestV", Constants.HAMCREST);
+        builder.addParam("screenArchitectureV", Util.getVersionPlugin());
 
         Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), BUILD_GRADLE);
         if (exists && force == BooleanOption.FALSE){

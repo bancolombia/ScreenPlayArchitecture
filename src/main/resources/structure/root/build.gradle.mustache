@@ -1,18 +1,3 @@
-group '{{groupId}}'
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'net.serenity-bdd.aggregator'
-
-sourceCompatibility = {{javaVersion}}
-
-repositories {
-    maven {
-        url "{{remoteRepository}}"
-    }
-    mavenLocal()
-}
 buildscript {
     repositories {
         maven {
@@ -27,6 +12,24 @@ buildscript {
     }
 }
 
+plugins {
+	id 'co.com.bancolombia.screenPlayArchitecture' version "{{screenArchitectureV}}"
+	id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+group '{{groupId}}'
+
+sourceCompatibility = {{javaVersion}}
+
+repositories {
+    maven {
+        url "{{remoteRepository}}"
+    }
+    mavenLocal()
+}
+
 ext {
     serenityVersion = '{{serenityV}}'
     serenityCucumberVersion = '{{cucumberV}}'
@@ -34,7 +37,6 @@ ext {
     junit = '{{junitV}}'
     hamcrest = '{{hamcrestV}}'
 }
-
 
 dependencies {
     implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"

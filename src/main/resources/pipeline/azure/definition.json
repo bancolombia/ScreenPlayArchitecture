@@ -1,0 +1,8 @@
+{
+  "folders": [],
+  "files": {
+    "pipeline/azure/azure.yaml.mustache": "{{namePipeline}}_Build.yaml"
+  },
+  "java": {
+  }
+}

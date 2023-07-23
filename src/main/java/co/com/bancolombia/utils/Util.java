@@ -3,7 +3,9 @@ package co.com.bancolombia.utils;
 import co.com.bancolombia.exceptions.ParamNotFoundException;
 import org.gradle.api.logging.Logger;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Util {
 
@@ -29,6 +31,12 @@ public class Util {
         } else {
             return null;
         }
+    }
+
+    public static String formatTaskOptions(List<?> options) {
+        return "["
+                + options.stream().map(Object::toString).sorted().collect(Collectors.joining("|"))
+                + "]";
     }
 
     public static String fillPath(String path, Map<String, Object> params) throws ParamNotFoundException{

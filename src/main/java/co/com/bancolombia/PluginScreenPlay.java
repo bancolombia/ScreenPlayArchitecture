@@ -3,6 +3,7 @@ package co.com.bancolombia;
 import co.com.bancolombia.models.TaskModel;
 import co.com.bancolombia.tasks.ValidateStructureTask;
 import co.com.bancolombia.tasks.annotations.CATask;
+import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.ReflectionUtils;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
@@ -41,6 +42,7 @@ public class PluginScreenPlay implements Plugin<Project> {
                                     .name(clazz.getAnnotation(CATask.class).name())
                                     .shortcut(clazz.getAnnotation(CATask.class).shortCut())
                                     .description(clazz.getAnnotation(CATask.class).description())
+                                    .group(Constants.PLUGIN_TASK_GROUP)
                                     .taskAction(clazz);
                     return builder.build();
                 });

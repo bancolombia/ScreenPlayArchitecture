@@ -5,6 +5,7 @@ import co.com.bancolombia.exceptions.ParamNotFoundException;
 import co.com.bancolombia.models.FileModel;
 import co.com.bancolombia.models.Release;
 import co.com.bancolombia.models.TemplateDefinition;
+import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.FileUtil;
 import co.com.bancolombia.utils.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +46,7 @@ public class ModuleBuilder {
     private final List<String> dirsToDelete = new ArrayList<>();
     private final Logger logger;
     public static final String LATEST_RELEASE = "latestRelease";
+    private static final String LANGUAGE = "language";
 
     public ModuleBuilder(Project project){
         this.project = project;
@@ -54,7 +56,10 @@ public class ModuleBuilder {
 
     private void initialize(){
         params.put("projectName", getProject().getName());
-
+        params.put("projectNameLower", getProject().getName().toLowerCase());
+        loadPackage();
+        loadLanguage();
+        loadIsExample();
     }
 
     public void addGroupId(String packageName) {
@@ -147,7 +152,40 @@ public class ModuleBuilder {
         mustache.execute(stringWriter, params);
         return stringWriter.toString();
     }
+    public void addParamPackage(String packageName) {
+        this.params.put("package", packageName.toLowerCase());
+        this.params.put("packagePath", packageName.replace('.', '/').toLowerCase());
+    }
+    private void loadPackage() {
+        try {
+            addParamPackage(FileUtil.readProperties(project.getProjectDir().getPath(), "package"));
+        } catch (IOException e) {
+            logger.debug("cannot read package from gradle.properties");
+        }
+    }
+    private void loadLanguage() {
+        String language = null;
+        try {
+            language = FileUtil.readProperties(project.getProjectDir().getPath(), LANGUAGE);
+        } catch (IOException e) {
+            logger.debug("cannot read language from gradle.properties");
+        }
+        if (language == null) {
+            language = Constants.Language.JAVA.name().toLowerCase();
+        }
+        this.params.put(LANGUAGE, language);
+    }
 
+    private void loadIsExample() {
+        final String param = "example";
+        try {
+            this.params.put(
+                    param, "true".equals(FileUtil.readProperties(project.getProjectDir().getPath(), param)));
+        } catch (IOException e) {
+            logger.debug("cannot read example from gradle.properties");
+            this.params.put(param, false);
+        }
+    }
     /*public Release getLatestRelease() {
         if (params.get(LATEST_RELEASE) == null) {
             loadLatestRelease();

@@ -14,6 +14,7 @@ import org.gradle.internal.logging.text.StyledTextOutputFactory;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -28,22 +29,21 @@ public abstract class AbstracScreenPlayArchitectureDefaultTask extends DefaultTa
         );
     }
 
-
     @Inject
     protected StyledTextOutputFactory getTextOutputFactory() {
         throw new UnsupportedOperationException();
     }
 
     @TaskAction
-    public void excuteBaseTask() throws IOException, ScreenPlayException{
+    public void executeBaseTask() throws IOException, ScreenPlayException{
+
         long start = System.currentTimeMillis();
         execute();
         afterExecute(
                 () -> {
                     String type = "After" + builder.getStringParam("type");
-                    return resolveFactory(resolve(), resolve(), type);
-                }
-        );
+                    return resolveFactory(resolvePackage(), resolvePrefix(), type);
+                });
         afterExecute(() -> resolveFactory(getClass().getPackageName(), "", "After" + getCleanedClass()));
     }
 
@@ -79,8 +79,8 @@ public abstract class AbstracScreenPlayArchitectureDefaultTask extends DefaultTa
 
     @SneakyThrows
     protected List<String> resolveTypes() {
-        return ReflectionUtils.getModuleFactories(resolve())
-                .map(clazz -> clazz.getSimpleName().replace(resolve(), "").toUpperCase())
+        return ReflectionUtils.getModuleFactories(resolvePackage())
+                .map(clazz -> clazz.getSimpleName().replace(resolvePrefix(), "").toUpperCase())
                 .collect(Collectors.toList());
     }
 
@@ -95,7 +95,26 @@ public abstract class AbstracScreenPlayArchitectureDefaultTask extends DefaultTa
         return className;
     }
 
-    protected String resolve() {
+    protected void printHelp() {
+        Optional.ofNullable(getProject().getTasks().findByPath("help"))
+                .ifPresent(task -> task.getActions().stream()
+                        .findFirst()
+                        .ifPresent(
+                                action -> {
+                                    task.setProperty("taskPath", getName());
+                                    action.execute(task);
+                                }));
+    }
+    @SneakyThrows
+    protected ModuleFactory resolveFactory(String type) {
+        return resolveFactory(resolvePackage(), resolvePrefix(), type);
+    }
+
+    protected String resolvePrefix() {
+        throw new UnsupportedOperationException("Method not implemented");
+    }
+
+    protected String resolvePackage() {
         throw new UnsupportedOperationException("Method not implemented");
     }
 }

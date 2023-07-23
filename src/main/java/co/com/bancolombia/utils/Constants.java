@@ -1,6 +1,9 @@
 package co.com.bancolombia.utils;
 
 public class Constants {
+
+    public static final String PLUGIN_TASK_GROUP = "ScreenPlay Architecture";
+
     public enum BooleanOption {
         TRUE,
         FALSE
@@ -18,7 +21,7 @@ public class Constants {
         UX
     }
 
-    public static final String PLUGIN_VERSION = "1.0.0";
+    public static final String PLUGIN_VERSION = "1.0.1";
     public static final String BUILD_GRADLE = "./build.gradle";
     public static final String BANCOLOMBIA_REPOSITORIES = "https://artifactory.apps.bancolombia.com/maven-bancolombia/";
     public static final String SERENITY_VERSION = "1.9.20";
