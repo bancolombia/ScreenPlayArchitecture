@@ -6,6 +6,7 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
 - [Plugin Implementation](#plugin-implementation)
 - [Tasks](#tasks)
   - [Generate Project](#generate-project)
+  - [Generate Pipeline](#generate-pipeline)
 
 
 
@@ -77,4 +78,16 @@ gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certific
    ┣ 📜build.gradle
    ┗ 📜settings.gradle
    ```
+## Generate Pipeline
+The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root project, this task has one required parameter `name` and `type`
+- **`name`** `= NamePipeline`: This parameter is going to specify the name of the pipeline. `field is requeired`
+- **`type`** `= azure`: This parameter is going to specify the pipeline type. `field is requeired`
 
+```shell
+  gradle generatePipeline --name=pipelineCi --type=[type Pipeline] 
+  gradle gpl --name=pipelineCi --type=[typePipeline] 
+```
+
+| Reference for **pipelineType** | Name           |
+| ------------------------------ | -------------- |
+| azure                          | Azure Pipeline |
