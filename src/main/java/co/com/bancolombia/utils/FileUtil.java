@@ -10,12 +10,11 @@ import org.apache.commons.io.IOUtils;
 import org.gradle.api.Project;
 
 public class FileUtil {
+    private static final String GRADLE_PROPERTIES = "/gradle.properties";
 
     public static boolean exists(String dir, String file) {
         return Files.exists(Paths.get(dir, file));
     }
-    private static final String GRADLE_PROPERTIES = "/gradle.properties";
-
 
     public static String getResourceAsString(DefaultResolver resolver, String path)
             throws IOException {

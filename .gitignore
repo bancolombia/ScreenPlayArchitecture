@@ -169,7 +169,6 @@ modules.xml
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -209,8 +208,7 @@ nbdist/
 # Ignore Gradle GUI config
 gradle-app.setting
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+
 
 # Cache of project
 .gradletasknamecache
@@ -303,8 +301,6 @@ Temporary Items
 # -----
 *.hprof
 
-#gradle wrapper
-gradle/
 
 # Visual Studio Code
 .vscode

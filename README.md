@@ -2,7 +2,7 @@
 
 Gradle plugin to create a java application based on ScreenPlay Architecture following our best practices.
 
-- [Scaffolding of ScreenPlay Architecture](#Scaffolding of ScreenPlay Architecture)
+- [Scaffolding of ScreenPlay Architecture](#Scaffolding-of-ScreenPlay-Architecture)
 - [Plugin Implementation](#plugin-implementation)
 - [Tasks](#tasks)
   - [Generate Project](#generate-project)
@@ -27,7 +27,7 @@ echo "plugins {
 }" > build.gradle
 ```
 # Tasks
-The Scaffolding ScreenPlay Architecture plugin will allow you run ? tasks:
+The Scaffolding ScreenPlay Architecture plugin will allow you run 2 tasks:
 
 ## Generate Project
 

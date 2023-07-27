@@ -1,0 +1,11 @@
+{
+  "folders": [
+  ],
+  "java" : {
+  },
+  "files" : {
+    "structure/root/build.gradle.mustache": "build.gradle",
+    "structure/root/settings.gradle.mustache": "settings.gradle",
+    "structure/root/serenity.properties.mustache": "serenity.properties"
+  }
+}
