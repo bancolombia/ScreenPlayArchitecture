@@ -6,7 +6,7 @@ import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.Constants.ProjectType;
 import co.com.bancolombia.utils.Constants.Language;
 import co.com.bancolombia.utils.Constants.BooleanOption;
-import static co.com.bancolombia.utils.Constants.BUILD_GRADLE;
+import static co.com.bancolombia.utils.Constants.SERENITY_PROPERTIES;
 
 import co.com.bancolombia.utils.FileUtil;
 import co.com.bancolombia.utils.Util;
@@ -93,7 +93,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addParam("hamcrestV", Constants.HAMCREST);
         builder.addParam("screenArchitectureV", Util.getVersionPlugin());
 
-        Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), BUILD_GRADLE);
+        Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), SERENITY_PROPERTIES);
         if (exists && force == BooleanOption.FALSE){
             logger.lifecycle("Another project was found in the same directory, rewriting build.gradle and setting.gradle files ");
             builder.setupFromTemplate("structure/restructure");

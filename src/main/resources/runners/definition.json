@@ -1,0 +1,10 @@
+{
+  "folders": [
+  ],
+  "java" : {
+    "runners/Runner.java.mustache": "src/test/{{language}}/{{packagePath}}/runners/{{runnerName}}.java"
+  },
+  "files" : {
+
+  }
+}

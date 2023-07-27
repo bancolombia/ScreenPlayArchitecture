@@ -27,6 +27,7 @@
   "files" : {
     "structure/root/build.gradle.mustache": "build.gradle",
     "structure/root/settings.gradle.mustache": "settings.gradle",
-    "structure/root/serenity.properties.mustache": "serenity.properties"
+    "structure/root/serenity.properties.mustache": "serenity.properties",
+    "structure/root/gradle.properties.mustache": "gradle.properties"
   }
 }

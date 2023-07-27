@@ -51,4 +51,10 @@ public class Util {
         }
         return path;
     }
+
+    public static String capitalize(String data) {
+        char[] c = data.toCharArray();
+        c[0] = Character.toUpperCase(c[0]);
+        return new String(c);
+    }
 }

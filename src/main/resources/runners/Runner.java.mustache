@@ -1,0 +1,13 @@
+package {{package}}.runners;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
+import net.serenity.cucumber.CucumberWithSerenity;
+import org.junit.runner.RunWith;
+
+@RunWith(CucumberWithSerenity.class)
+@CucumberOptions(
+        features = "features/",
+        glue = "{{packagePath}}.stepdefinitions",
+        snippets = SnippetType.CAMELCASE)
+public class {{runnerName}} {}

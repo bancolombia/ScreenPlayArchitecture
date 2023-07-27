@@ -23,6 +23,7 @@ public class Constants {
 
     public static final String PLUGIN_VERSION = "1.0.0";
     public static final String BUILD_GRADLE = "./build.gradle";
+    public static final String SERENITY_PROPERTIES = "./serenity.properties";
     public static final String BANCOLOMBIA_REPOSITORIES = "https://artifactory.apps.bancolombia.com/maven-bancolombia/";
     public static final String SERENITY_VERSION = "1.9.20";
     public static final String SERENITY_CUCUMBER_VERSION = "1.9.8";
