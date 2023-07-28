@@ -91,7 +91,6 @@ public class ModuleBuilder {
 
         for (String folder : templateDefinition.getFolders()){
             addDir(Util.fillPath(folder, params));
-
         }
         Map<String, String> projectFiles = new HashMap<>(templateDefinition.getFiles());
         projectFiles.putAll(templateDefinition.getJava());

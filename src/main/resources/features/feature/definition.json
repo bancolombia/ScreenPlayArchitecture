@@ -1,0 +1,10 @@
+{
+  "folders": [
+    "src/test/resources/features/{{subfolder}}"
+  ],
+  "java" : {
+  },
+  "files" : {
+    "features/feature/feature.feature.mustache": "features/{{subfolder}}/{{featureName}}.feature"
+  }
+}

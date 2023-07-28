@@ -6,8 +6,10 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
 - [Plugin Implementation](#plugin-implementation)
 - [Tasks](#tasks)
   - [Generate Project](#generate-project)
-  - [Generate Pipeline](#generate-pipeline)
+  - [Generate Features](#generate-features)
   - [Generate Runners](#generate-runners)
+  - [Generate Pipeline](#generate-pipeline)
+ 
 
 
 
@@ -28,7 +30,7 @@ echo "plugins {
 }" > build.gradle
 ```
 # Tasks
-The Scaffolding ScreenPlay Architecture plugin will allow you run 2 tasks:
+The Scaffolding ScreenPlay Architecture plugin will allow you run 4 tasks:
 
 ## Generate Project
 
@@ -79,6 +81,28 @@ gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certific
    ┣ 📜build.gradle
    ┗ 📜settings.gradle
    ```
+## Generate Features
+The **`generateFeature | gft`** task will generate feature files inside features folder, this task has one required parameter `name`
+also, there are 2 parameters optional `example` and `nameSubFolder` 
+- **`name`** `= NameFeature`: This parameter is going to specify the name of the feature class. `field is requeired`
+- **`example`** `= true`: This parameter is going to specify if Scenario Outline are needed. `field for default is false`
+- **`nameSubFolder`** `= nameSubFolder`: This parameter is going to specify the name of the subfolder that will contain the feature files. `field is optional, if not entered, no subfolder will be created.`
+
+```shell
+  gradle generateFeature --name=featureClassName --example=[optionalBoolValue] --nameSubFolder=[optionalValue]
+  gradle gft --name=featureClassName --example=[optionalBoolValue] --nameSubFolder=[optionalValue]
+```
+
+
+## Generate Runners
+The **`generateRunner | grun`** task will generate runners classes inside runners package, this task has one required parameter `name`
+- **`name`** `= NameRunner`: This parameter is going to specify the name of the runner class. `field is requeired`
+
+```shell
+  gradle generateRunner --name=runnerClassName
+  gradle grun --name=runnerClassName
+```
+
 ## Generate Pipeline
 The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root project, this task has two required parameters `name` and `type`
 - **`name`** `= NamePipeline`: This parameter is going to specify the name of the pipeline. `field is requeired`
@@ -93,12 +117,5 @@ The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root p
 | ------------------------------ | -------------- |
 | azure                          | Azure Pipeline |
 
-## Generate Runners 
-The **`generateRunner | grun`** task will generate runner class inside runners package, this task has one required parameter `name`
-- **`name`** `= NameRunner`: This parameter is going to specify the name of the runner class. `field is requeired`
 
-```shell
-  gradle generateRunner --name=runnerClassName
-  gradle grun --name=runnerClassName
-```
 
