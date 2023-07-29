@@ -1,0 +1,8 @@
+{
+  "folders": [],
+  "files": {
+  },
+  "java": {
+    "interactions/get/get.java.mustache" : "src/main/{{language}}/{{packagePath}}/interactions/Get.java"
+  }
+}

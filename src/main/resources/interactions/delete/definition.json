@@ -1,0 +1,8 @@
+{
+  "folders": [],
+  "files": {
+  },
+  "java": {
+    "interactions/delete/delete.java.mustache" : "src/main/{{language}}/{{packagePath}}/interactions/Delete.java"
+  }
+}
