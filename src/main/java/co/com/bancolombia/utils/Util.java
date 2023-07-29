@@ -3,6 +3,7 @@ package co.com.bancolombia.utils;
 import co.com.bancolombia.exceptions.ParamNotFoundException;
 import org.gradle.api.logging.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -56,5 +57,17 @@ public class Util {
         char[] c = data.toCharArray();
         c[0] = Character.toUpperCase(c[0]);
         return new String(c);
+    }
+
+    public static List<String> validateMethod(String method) {
+        List<String> methods = new ArrayList<>();
+        if (method.equalsIgnoreCase("get")){
+            methods.add("resource");
+            methods.add("param");
+        }else {
+            methods.add("to");
+            methods.add("body");
+        }
+        return methods;
     }
 }

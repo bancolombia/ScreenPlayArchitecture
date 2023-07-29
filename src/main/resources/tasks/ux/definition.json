@@ -1,0 +1,10 @@
+{
+  "folders": [
+  ],
+  "java" : {
+    "tasks/ux/uxtask.java.mustache": "src/main/{{language}}/{{packagePath}}/tasks/{{taskName}}.java"
+  },
+  "files" : {
+
+  }
+}

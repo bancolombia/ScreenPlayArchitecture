@@ -1,0 +1,10 @@
+{
+  "folders": [
+  ],
+  "java" : {
+    "tasks/rest/resttask.java.mustache": "src/main/{{language}}/{{packagePath}}/tasks/{{taskName}}.java"
+  },
+  "files" : {
+
+  }
+}

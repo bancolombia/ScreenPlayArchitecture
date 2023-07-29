@@ -1,0 +1,30 @@
+package {{package}}.tasks;
+
+import {{package}}.interactions.{{method}};
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.Actor;
+import io.restassured.http.ContentType;
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+
+public class {{taskName}} extends implements Task {
+
+    public {{taskName}}() {}
+
+    @Override
+    public <T extends Actor> void performAs(T actor){
+        actor.attemptsTo(
+            {{method}}.{{access}}().with(
+                        requestSpecification -> requestSpecification
+                        .relaxedHTTPSValidation()
+                        .contentType(ContentType.JSON)
+                        .header("", "")
+                        .{{data}}("", "")
+            )
+        );
+
+    }
+    public static {{taskName}} {{taskStatic}}() {
+        return instrumented({{taskName}}.class);
+    }
+
+}

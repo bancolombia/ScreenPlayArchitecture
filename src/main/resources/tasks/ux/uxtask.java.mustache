@@ -1,0 +1,25 @@
+package {{package}}.tasks;
+
+import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+
+public class {{taskName}} extends implements Task {
+
+    public {{taskName}}() {}
+
+    @Override
+    public <T extends Actor> void performAs(T actor){
+        actor.attemptsTo(
+            Click.On(""),
+            Enter.theValue("").into("")
+        );
+
+    }
+    public static {{taskName}} {{taskStatic}}() {
+        return instrumented({{taskName}}.class);
+    }
+
+}

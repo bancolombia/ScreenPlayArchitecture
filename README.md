@@ -9,6 +9,7 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
   - [Generate Features](#generate-features)
   - [Generate Runners](#generate-runners)
   - [Generate Rest Interaction](#generate-rest-interaction)
+  - [Generate Tasks](#generate-tasks)
   - [Generate Pipeline](#generate-pipeline)
  
 
@@ -119,8 +120,23 @@ The **`generateRestInteraction | gri`** task will generate the rest interaction 
 | Get                               | Rest Get     |
 | Options                           | Rest Options |
 | Patch                             | Rest Patch   |
-| Delete                            | Rest Delete  |
 | Put                               | Rest Put     |
+
+## Generate Tasks
+The **`generateTask | gtk`** task will generate the Rest task or Ux class, this task has two required parameter `name` and `typeTask`
+- **`name`** `= nameTaskClass`: This parameter is going to specify the name task class to use. `field is required`
+- **`typeTask`** `= Rest`: This parameter is going to specify the type task class to use. `field is required`
+
+```shell
+  gradle generateTask --name=[nameTaskClass] --typeTask=[typeTask] --method[optionalField]
+  gradle gtk --name=[nameTaskClass] --typeTask=[typeTask] --method[optionalField]
+```
+
+| Reference for **typeTask** | Name      |
+|----------------------------|-----------|
+| Rest                       | Rest Rest |
+| Ux                         | Rest Ux   |
+
 
 ## Generate Pipeline
 The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root project, this task has two required parameters `name` and `type`
