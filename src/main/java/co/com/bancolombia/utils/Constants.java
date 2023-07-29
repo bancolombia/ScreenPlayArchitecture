@@ -1,5 +1,8 @@
 package co.com.bancolombia.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Constants {
 
     public static final String PLUGIN_TASK_GROUP = "ScreenPlay Architecture";
@@ -30,6 +33,8 @@ public class Constants {
     public static final String LOMBOK_VERSION = "1.18.22";
     public static final String JUNIT = "4.12";
     public static final String HAMCREST = "1.3";
+
+    public static final List<String> INTERACTIONS = List.of(new String[]{"POST", "GET", "PUT", "OPTIONS", "PATCH", "DELETE"});
 
 
 }

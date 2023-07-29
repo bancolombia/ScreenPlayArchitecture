@@ -13,8 +13,6 @@ import java.io.IOException;
 public class GenerateRunnerTask extends AbstracScreenPlayArchitectureDefaultTask{
 
     private String name = "Runner";
-
-
     @Option(option = "name", description = "Set the runner name")
     public void setName(String runnerName){ this.name = runnerName; }
 
