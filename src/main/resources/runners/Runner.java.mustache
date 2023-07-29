@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = "features/",
-        glue = "{{packagePath}}.stepdefinitions",
+        glue = "{{package}}.stepdefinitions",
         snippets = SnippetType.CAMELCASE)
 public class {{runnerName}} {}
