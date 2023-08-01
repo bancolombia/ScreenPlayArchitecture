@@ -10,7 +10,7 @@ import org.gradle.api.tasks.options.Option;
 
 import java.io.IOException;
 
-@CATask( name = "generateTask", shortCut = "gtk", description = "Generate Serenity task ")
+@CATask( name = "generateTask", shortCut = "gtk", description = "Generate Serenity task")
 public class GenerateTasksTask extends AbstracScreenPlayArchitectureDefaultTask{
 
     private String name = "";

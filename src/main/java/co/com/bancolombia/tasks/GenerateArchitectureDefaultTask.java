@@ -14,18 +14,18 @@ import org.gradle.api.tasks.options.Option;
 
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 @CATask(
         name = "screenPlayArchitecture",
         shortCut = "spa",
-        description = "Scaffolding ScreePlay architecture project"
+        description = "Scaffolding ScreenPlay architecture project"
 )
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
     private String groupId = "co.com.bancolombia.certificacion";
     private ProjectType type = ProjectType.UX;
     private String projectName = "Screenplay_architecture";
     private String principalPackage = "screen";
-    private BooleanOption lombok = BooleanOption.TRUE;
     private BooleanOption force = BooleanOption.FALSE;
     private Language language = Language.JAVA;
     private int javaVersion = Constants.Java11;
@@ -42,9 +42,6 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     @Option(option = "projectName", description = "Set project name, by default is ScreenPlayArchitecture")
     public void name(String projectName) { this.projectName = projectName; }
 
-    @Option(option = "lombok", description = "Switch the status of lombok in this project")
-    public void lombok(BooleanOption lombok) { this.lombok = lombok; }
-
     @Option(option = "language", description = "Set code language project, by default is Java")
     public void language(Language language) { this.language = language; }
 
@@ -57,9 +54,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     }
 
 
-    /*@OptionValues("lombok")
-    public List<BooleanOption> getLombok(BooleanOption lombok) { return Arrays.asList(BooleanOption.values());
-    }
+    /*
 
     @OptionValues("language")
     public List<Language> getLanguage(Language language) { return Arrays.asList(Language.values()); }
@@ -81,14 +76,12 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addGroupId(groupId);
         builder.addParam("projectName", projectName);
         builder.addParam("principalPackage", principalPackage);
-        builder.addParam("lombok", lombok == BooleanOption.TRUE);
         builder.addParam("language", language.name().toLowerCase());
         builder.addParam("javaVersion", javaVersion);
         builder.addParam("java11", javaVersion == Constants.Java11);
         builder.addParam("remoteRepository", Constants.BANCOLOMBIA_REPOSITORIES);
         builder.addParam("serenityV", Constants.SERENITY_VERSION);
         builder.addParam("cucumberV",Constants.SERENITY_CUCUMBER_VERSION);
-        builder.addParam("lombookV", Constants.LOMBOK_VERSION);
         builder.addParam("junitV", Constants.JUNIT);
         builder.addParam("hamcrestV", Constants.HAMCREST);
         builder.addParam("screenArchitectureV", Util.getVersionPlugin());
@@ -102,4 +95,5 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         }
         builder.persist();
     }
+
 }

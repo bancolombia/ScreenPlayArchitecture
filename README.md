@@ -11,7 +11,8 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
   - [Generate Rest Interaction](#generate-rest-interaction)
   - [Generate Tasks](#generate-tasks)
   - [Generate Pipeline](#generate-pipeline)
- 
+- [How can I help?](#how-can-i-help)
+- [Whats Next?](#whats-next)
 
 
 
@@ -126,6 +127,7 @@ The **`generateRestInteraction | gri`** task will generate the rest interaction 
 The **`generateTask | gtk`** task will generate the Rest task or Ux class, this task has two required parameter `name` and `typeTask`
 - **`name`** `= nameTaskClass`: This parameter is going to specify the name task class to use. `field is required`
 - **`typeTask`** `= Rest`: This parameter is going to specify the type task class to use. `field is required`
+- **`method`** `= typeTask`: If you choose 'Rest' for the `typeTask` field, the 'method' field becomes mandatory, as it constructs the Task list for REST consumption. `field is required`
 
 ```shell
   gradle generateTask --name=[nameTaskClass] --typeTask=[typeTask] --method[optionalField]
@@ -152,5 +154,8 @@ The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root p
 | ------------------------------ | -------------- |
 | azure                          | Azure Pipeline |
 
+# How can I help?
+Review the issues, we hear new ideas. Read more [Contributing](https://github.com/bancolombia/)
 
-
+# Whats Next?
+Read more  [About Clean Architecure](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)

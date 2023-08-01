@@ -7,6 +7,7 @@ import java.util.Map;
 public class Constants {
 
     public static final String PLUGIN_TASK_GROUP = "ScreenPlay Architecture";
+    public static final String APP_SERVICE = "app-service";
 
     public enum BooleanOption {
         TRUE,
