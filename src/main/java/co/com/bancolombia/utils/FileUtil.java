@@ -1,9 +1,12 @@
 package co.com.bancolombia.utils;
 
 import java.io.*;
+import java.nio.charset.MalformedInputException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import com.github.mustachejava.resolver.DefaultResolver;
 import org.apache.commons.io.IOUtils;
@@ -52,6 +55,23 @@ public class FileUtil {
             return properties.getProperty(variable);
         } else {
             throw new IOException("No parameter " + variable + " in gradle.properties file");
+        }
+    }
+
+    public static String readFile(Project project, String filePath) throws IOException {
+        File file = project.file(filePath).getAbsoluteFile();
+        project.getLogger().debug(file.getAbsolutePath());
+        try {
+            return Files.lines(Paths.get(file.toURI())).collect(Collectors.joining("\n"));
+        } catch (MalformedInputException e) {
+            project
+                    .getLogger()
+                    .warn(
+                            "error '{}' reading file {}, trying to read with ISO_8859_1 charset",
+                            e.getMessage(),
+                            file.getAbsoluteFile());
+            return Files.lines(Paths.get(file.toURI()), StandardCharsets.ISO_8859_1)
+                    .collect(Collectors.joining("\n"));
         }
     }
 }

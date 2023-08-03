@@ -1,7 +1,6 @@
 package co.com.bancolombia;
 
 import co.com.bancolombia.models.TaskModel;
-import co.com.bancolombia.tasks.ValidateStructureTask;
 import co.com.bancolombia.tasks.annotations.CATask;
 import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.ReflectionUtils;
@@ -25,13 +24,8 @@ public class PluginScreenPlay implements Plugin<Project> {
 
         TaskContainer taskContainer = project.getTasks();
         initTask().forEach(task -> this.appendTask(taskContainer, task));
-
         project.getSubprojects().forEach(this::listenTest);
 
-        /*taskContainer
-                .getByName("compileJava")
-                .getDependsOn()
-                .add(taskContainer.getByName("ValidateStructure"));*/
     }
 
     private Stream<TaskModel> initTask() {
@@ -60,13 +54,6 @@ public class PluginScreenPlay implements Plugin<Project> {
                                         test.getLogger().lifecycle(testOutputEvent.getMessage()
                                                 .replace('\n', ' '));
                                     }}));
-    }
-
-    @NotNull
-    private Action<? extends ValidateStructureTask> buildValidateStructureTaskAction() {
-        return task ->
-                task.getWhiteListedDependencies()
-                        .set(pluginScreenPlayExtension.getModelsProps().getWhiteListedDependencies());
     }
 
     @SuppressWarnings("unchecked")

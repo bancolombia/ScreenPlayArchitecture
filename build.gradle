@@ -13,7 +13,7 @@ ext {
 }
 
 group = 'co.com.bancolombia.screenPlayArchitecture'
-version = '1.0.0'
+version = '1.1.0'
 
 
 publishing {
