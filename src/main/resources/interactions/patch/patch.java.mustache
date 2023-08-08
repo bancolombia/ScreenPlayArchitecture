@@ -2,8 +2,9 @@ package {{package}}.interactions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.thucydides.core.annotations.Step;
-import static net.serenitybdd.screenplay.Task.instrumented;
-import net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
+import net.serenitybdd.screenplay.rest.interactions.RestInteraction;
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static net.serenitybdd.screenplay.rest.abilities.CallAnApi.as;
 
 public class Patch extends RestInteraction {
 

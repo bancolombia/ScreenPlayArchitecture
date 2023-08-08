@@ -13,12 +13,12 @@ public class {{taskName}} implements Task {
     @Override
     public <T extends Actor> void performAs(T actor){
         actor.attemptsTo(
-            {{method}}.{{access}}().with(
+            {{method}}.{{access}}("").with(
                         requestSpecification -> requestSpecification
                         .relaxedHTTPSValidation()
                         .contentType(ContentType.JSON)
-                        .header("", "")
-                        .{{data}}("", "")
+                        .header("#", "")
+                        .{{data}}("")
             )
         );
 

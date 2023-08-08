@@ -30,10 +30,10 @@ public class Constants {
     public static final String BUILD_GRADLE = "./build.gradle";
     public static final String SERENITY_PROPERTIES = "./serenity.properties";
     public static final String BANCOLOMBIA_REPOSITORIES = "https://artifactory.apps.bancolombia.com/maven-bancolombia/";
-    public static final String SERENITY_VERSION = "1.9.20";
-    public static final String SERENITY_CUCUMBER_VERSION = "1.9.8";
+    public static final String SERENITY_VERSION = "3.9.8";
+    public static final String SERENITY_CUCUMBER_VERSION = "3.9.8";
     public static final String LOMBOK_VERSION = "1.18.22";
-    public static final String JUNIT = "4.12";
+    public static final String JUNIT = "4.13.2";
     public static final String HAMCREST = "1.3";
     public static final List<String> INTERACTIONS = List.of(new String[]{"POST", "GET", "PUT", "OPTIONS", "PATCH"});
     public static final List<String> TASKS = List.of(new String[]{"UX", "REST"});
