@@ -7,39 +7,147 @@ plugins {
 }
 
 ext {
-    bcRepo = ''
+    bcRepo = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
     bcPluginName = 'Scaffold ScreanPlay Architecture Bancolombia'
     bcPluginDescription = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
 }
 
 group = 'co.com.bancolombia.screenplayarchitecture'
-version = '1.1.0'
-
-
-publishing {
-    publications {
-        mavenPlugin(MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
+version = '1.0.0'
 
 repositories {
     mavenCentral()
 }
 
+if (project.hasProperty('signing.keyId')) { // publish as library in maven central
+    apply plugin: 'signing'
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+
+                pom {
+                    name = bcPluginName
+                    description = bcPluginDescription
+                    url = bcRepo
+                    licenses {
+                        license {
+                            name = "APACHE LICENSE, VERSION 2.0"
+                            url = "https://www.apache.org/licenses/LICENSE-2.0"
+                            distribution = "repo"
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = "jumosqu"
+                            name = "juniormosquera12@gmail.com"
+                            email = "juniormosquera12@gmail.com"
+                        }
+                    }
+                    scm {
+                        url = bcRepo
+                    }
+                }
+            }
+        }
+    }
+
+    /*nexusPublishing {
+        repositories {
+            sonatype() {
+                group = "com.github.JuniorMM12"
+            }
+        }
+    }*/
+
+    signing {
+        sign(publishing.publications.mavenJava)
+    }
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+    javadoc {
+        if (JavaVersion.current().isJava9Compatible()) {
+            options.addBooleanOption('html5', true)
+        }
+    }
+    javadoc.failOnError = false
+
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
+
+    def signingTasks = tasks.withType(Sign)
+    signingTasks.forEach {project.logger.lifecycle('task sign: ' + it.name)}
+    tasks.withType(PublishToMavenRepository).configureEach { task ->
+        project.logger.lifecycle('task publish: ' + task.name)
+        if(task.name == 'publishMavenJavaPublicationToSonatypeRepository') {
+            project.logger.lifecycle('Applied to ' + task.name)
+            task.mustRunAfter('signMavenJavaPublication')
+            task.mustRunAfter('signPluginMavenPublication')
+        } else {
+            task.enabled = false
+        }
+    }
+}else{
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/bancolombia/scaffold-clean-architecture")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+        }
+    }
+
+    gradlePlugin {
+        // Define the plugin
+        website = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
+        vcsUrl = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
+
+        plugins {
+            cleanArchitecture {
+                id = 'co.com.bancolombia.screenplayarchitecture'
+                displayName = bcPluginName
+                description = bcPluginDescription
+                implementationClass = 'co.com.bancolombia.PluginScreenPlay'
+                tags.set(['scaffold', 'screenplayarchitecture', 'Bancolombia', 'OpenSource'])
+            }
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/bancolombia/scaffold-clean-architecture")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
 gradlePlugin {
     // Define the plugin
+    website = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
+    vcsUrl = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
+
     plugins {
         cleanArchitecture {
             id = 'co.com.bancolombia.screenplayarchitecture'
             displayName = bcPluginName
             description = bcPluginDescription
             implementationClass = 'co.com.bancolombia.PluginScreenPlay'
-            //tags.set(['scaffold', 'cleanArchitecture', 'Bancolombia', 'OpenSource'])
+            tags.set(['scaffold', 'screenplayarchitecture', 'Bancolombia', 'OpenSource'])
         }
     }
 }
