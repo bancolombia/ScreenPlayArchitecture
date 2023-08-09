@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        maven {
+            url "{{remoteRepository}}"
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:{{serenityV}}")
+    }
+}
+
+plugins {
+	id 'co.com.bancolombia.screenPlayArchitecture' version '{{screenArchitectureV}}'
+	id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+group '{{groupId}}'
+
+sourceCompatibility = {{javaVersion}}
+
+repositories {
+    maven {
+        url "{{remoteRepository}}"
+    }
+    mavenLocal()
+}
+
+ext {
+    serenityVersion = '{{serenityV}}'
+    serenityCucumberVersion = '{{cucumberV}}'
+    lombokVersion = '{{lombookV}}'
+    junit = '{{junitV}}'
+    hamcrest = '{{hamcrestV}}'
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+
+    //Test compilation
+    testImplementation "junit:junit:$rootProject.ext.junit"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrest"
+
+    //Lombok dependencies
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor  "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly  "org.projectlombok:lombok:${lombokVersion}"
+}

@@ -1,3 +1,64 @@
+
 plugins {
     id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.0'
+
+}
+
+ext {
+    bcRepo = ''
+    bcPluginName = 'Scaffold ScreanPlay Architecture Bancolombia'
+    bcPluginDescription = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
+}
+
+group = 'co.com.bancolombia.screenplayarchitecture'
+version = '1.1.0'
+
+
+publishing {
+    publications {
+        mavenPlugin(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        cleanArchitecture {
+            id = 'co.com.bancolombia.screenplayarchitecture'
+            displayName = bcPluginName
+            description = bcPluginDescription
+            implementationClass = 'co.com.bancolombia.PluginScreenPlay'
+            //tags.set(['scaffold', 'cleanArchitecture', 'Bancolombia', 'OpenSource'])
+        }
+    }
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    api 'com.github.spullara.mustache.java:compiler:0.9.10'
+    api 'commons-io:commons-io:2.12.0'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.1'
+    implementation 'org.reflections:reflections:0.10.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.11.0'
 }

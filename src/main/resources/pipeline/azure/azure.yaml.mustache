@@ -1,0 +1,61 @@
+name: $(Build.SourceBranchName).$(date:yyyyMMdd)$(rev:.r)
+variables:
+  subComponentName: ''
+  componentName: ''
+  repo: ''
+  AW: ''
+trigger:
+  branches:
+    include:
+      - trunk
+      - feature/*
+  paths:
+    include:
+      - '**/*'
+pool:
+  name: Build
+  demands: java
+steps:
+  - task: SonarQubePrepare@4
+    displayName: 'Prepare analysis on SonarQube'
+    inputs:
+      SonarQube: SonarQube
+      scannerMode: CLI
+      configMode: manual
+      cliProjectKey: '$(Build.Repository.Name)_$(componentName)'
+      cliProjectName: '$(Build.Repository.Name)_$(componentName)'
+      cliProjectVersion: '$(Build.BuildNumber)'
+      cliSources: '$(componentName)/$(subComponentName)'
+      extraProperties: |
+        sonar.java.binaries=**/build/classes
+        sonar.java.libraries=**/build/libs
+        sonar.exclusions = **/*.gradle, **/*.json, **/*.xml, **/*.yaml
+  - task: Gradle@2
+    displayName: 'Gradlew'
+    inputs:
+      gradleWrapperFile: '$(componentName)/$(subComponentName)/gradlew'
+      workingDirectory: '$(componentName)/$(subComponentName)'
+      tasks: 'clean build -x test'
+      publishJUnitResults: false
+    continueOnError: true
+  - task: SonarQubeAnalyze@4
+    displayName: 'Run Code Analysis'
+  - task: sonar-buildbreaker@8
+    displayName: 'Break build on quality gate failure'
+    inputs:
+      SonarQube: SonarQube
+  - task: CopyFiles@2
+    displayName: 'Copy Files'
+    inputs:
+      SourceFolder: '$(componentName)/$(subComponentName)'
+      Contents: |
+        **/*.jar
+        !build
+      TargetFolder: '$(build.artifactstagingdirectory)'
+      CleanTargetFolder: true
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: $(AW)_$(repo)_$(componentName)'
+    inputs:
+      PathtoPublish: '$(componentName)/$(subComponentName)'
+      ArtifactName: '$(AW)_$(repo)_$(componentName)'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'],'refs/heads/trunk'))

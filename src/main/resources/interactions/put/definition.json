@@ -1,0 +1,8 @@
+{
+  "folders": [],
+  "files": {
+  },
+  "java": {
+    "interactions/put/put.java.mustache" : "src/main/{{language}}/{{packagePath}}/interactions/Put.java"
+  }
+}

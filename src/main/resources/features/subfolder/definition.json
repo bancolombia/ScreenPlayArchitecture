@@ -1,0 +1,9 @@
+{
+  "folders": [
+    "src/test/resources/features/{{subfolder}}/"
+  ],
+  "java" : {
+  },
+  "files" : {
+  }
+}

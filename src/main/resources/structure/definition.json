@@ -1,0 +1,33 @@
+{
+  "folders": [
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/exceptions",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/integrations",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/interactions",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/models",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/questions",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/tasks",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/userinterfaces",
+    "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/utils",
+    "src/test/{{language}}/{{groupIdPath}}/{{principalPackage}}/runners",
+    "src/test/{{language}}/{{groupIdPath}}/{{principalPackage}}/stepdefinitions",
+    "src/test/resources/features"
+  ],
+  "java" : {
+    "structure/root/Integration.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/integrations/Integration.java",
+    "structure/root/Interaction.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/interactions/Interaction.java",
+    "structure/root/Model.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/models/Model.java",
+    "structure/root/Question.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/questions/Question.java",
+    "structure/root/Task.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/tasks/Task.java",
+    "structure/root/UserInterface.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/userinterfaces/UserInterface.java",
+    "structure/root/Util.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/utils/Util.java",
+    "structure/root/Exception.java.mustache": "src/main/{{language}}/{{groupIdPath}}/{{principalPackage}}/exceptions/Exception.java",
+    "structure/root/Runner.java.mustache": "src/test/{{language}}/{{groupIdPath}}/{{principalPackage}}/runners/Runner.java",
+    "structure/root/StepDefinition.java.mustache": "src/test/{{language}}/{{groupIdPath}}/{{principalPackage}}/stepdefinitions/StepDefinition.java"
+  },
+  "files" : {
+    "structure/root/build.gradle.mustache": "build.gradle",
+    "structure/root/settings.gradle.mustache": "settings.gradle",
+    "structure/root/serenity.properties.mustache": "serenity.properties",
+    "structure/root/gradle.properties.mustache": "gradle.properties"
+  }
+}

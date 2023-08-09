@@ -1,0 +1,8 @@
+{
+  "folders": [],
+  "files": {
+  },
+  "java": {
+    "interactions/patch/patch.java.mustache" : "src/main/{{language}}/{{packagePath}}/interactions/Patch.java"
+  }
+}
