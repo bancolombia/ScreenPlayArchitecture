@@ -12,7 +12,7 @@ ext {
     bcPluginDescription = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
 }
 
-group = 'co.com.bancolombia.screenPlayArchitecture'
+group = 'co.com.bancolombia.screenplayarchitecture'
 version = '1.1.0'
 
 
@@ -35,7 +35,7 @@ gradlePlugin {
     // Define the plugin
     plugins {
         cleanArchitecture {
-            id = 'co.com.bancolombia.screenPlayArchitecture'
+            id = 'co.com.bancolombia.screenplayarchitecture'
             displayName = bcPluginName
             description = bcPluginDescription
             implementationClass = 'co.com.bancolombia.PluginScreenPlay'
