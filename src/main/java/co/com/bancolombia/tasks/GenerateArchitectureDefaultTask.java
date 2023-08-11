@@ -84,6 +84,7 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addParam("cucumberV",Constants.SERENITY_CUCUMBER_VERSION);
         builder.addParam("junitV", Constants.JUNIT);
         builder.addParam("hamcrestV", Constants.HAMCREST);
+        builder.addParam("versionLoom", Constants.LOMBOK_VERSION);
         builder.addParam("screenArchitectureV", Util.getVersionPlugin());
 
         Boolean exists = FileUtil.exists(builder.getProject().getProjectDir().getPath(), SERENITY_PROPERTIES);
