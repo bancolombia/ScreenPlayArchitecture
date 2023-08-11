@@ -23,13 +23,13 @@ To use the [plugin](#) you need Gradle version 7.4 or later, to start add the fo
 
 ```groovy
 plugins {
-    id "co.com.bancolombia.screenPlayArchitecture" version "1.0.0"
+    id "co.com.bancolombia.screenplayarchitecture" version "1.0.0"
 }
 ```
 or if is a new project execute this script in the root directory of your project.
 ```sh
 echo "plugins {
-  id \"co.com.bancolombia.screenPlayArchitecture\" version \"1.0.0\"
+  id \"co.com.bancolombia.screenplayarchitecture\" version \"1.0.0\"
 }" > build.gradle
 ```
 # Tasks
