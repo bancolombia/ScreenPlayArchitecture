@@ -33,15 +33,15 @@ public class GenerateFeatureTask extends AbstracScreenPlayArchitectureDefaultTas
     public void execute() throws IOException, ScreenPlayException {
         if (name.isEmpty()) {
             printHelp();
-            throw new IllegalArgumentException("The feature name is necessary: use gradle generateFeature --name[filename]");
+            throw new IllegalArgumentException("The feature name is necessary: use gradle generateFeature --name=[filename]");
         }
         name = name.toLowerCase();
         logger.lifecycle("ScreenPlay architecture plugin version: {}", Util.getVersionPlugin());
         logger.lifecycle("Feature name: {}", name);
         logger.lifecycle("Implement Scenario Outline {}", examples);
-        builder.addParam("featureName", name);
+        builder.addParam("featureName", name.toLowerCase());
         if (nameSubFolder != null) {
-            builder.addParam("subfolder", nameSubFolder);
+            builder.addParam("subfolder", nameSubFolder.toLowerCase());
             setupToExecute("features/subfolder");
             if (Boolean.parseBoolean(examples)) {
                 setupToExecute("features/outline");

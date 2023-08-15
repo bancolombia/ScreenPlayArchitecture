@@ -16,10 +16,9 @@ public class {{taskName}} implements Task {
             Click.On(""),
             Enter.theValue("").into("")
         );
-
     }
+
     public static {{taskName}} {{taskStatic}}() {
         return instrumented({{taskName}}.class);
     }
-
 }

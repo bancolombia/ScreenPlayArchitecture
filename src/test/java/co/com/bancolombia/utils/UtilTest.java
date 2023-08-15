@@ -23,7 +23,14 @@ public class UtilTest {
         Assert.assertEquals("Capitalize", Util.capitalize(test1));
         Assert.assertEquals("CapitalizeTest", Util.capitalize(test2));
     }
+    @Test
+    public void nocapitalize() {
+        String test1 = "capitalize";
+        String test2 = "capitalizeTest";
 
+        Assert.assertEquals("capitalize", Util.nocapitalize(test1));
+        Assert.assertEquals("capitalizeTest", Util.nocapitalize(test2));
+    }
     @Test
     public void shouldJoinPath() {
         String expected = "a/b/c/d";

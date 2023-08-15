@@ -28,11 +28,11 @@ public class GenerateRestInteractionTaskTest {
         Files.createDirectories(projectDir.toPath());
         writeString(
                 new File(projectDir, "build.gradle"),
-                "plugins {" + "  co.com.bancolombia.screenPlayArchitecture')" + "}");
+                "plugins {" + "  co.com.bancolombia.screenplayarchitecture')" + "}");
 
         Project project =
                 ProjectBuilder.builder()
-                        .withName("cleanArchitecture")
+                        .withName("screenArchitecture")
                         .withProjectDir(new File("build/unitTest"))
                         .build();
 
@@ -46,8 +46,16 @@ public class GenerateRestInteractionTaskTest {
     }
 
     @Test
+    public void GenerateRestInteractionGeneric() throws ScreenPlayException, IOException {
+        task.setTypeInteraction("Generic");
+        task.setNameInteraction("prueba");
+        task.execute();
+        assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/prueba.java").exists());
+    }
+    @Test
     public void GenerateRestInteractionPost() throws ScreenPlayException, IOException {
         task.setTypeInteraction("Post");
+        task.setNameInteraction("prueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/Post.java").exists());
     }
@@ -55,6 +63,7 @@ public class GenerateRestInteractionTaskTest {
     @Test
     public void GenerateRestInteractionGet() throws ScreenPlayException, IOException {
         task.setTypeInteraction("Get");
+        task.setNameInteraction("prueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/Get.java").exists());
     }
@@ -62,6 +71,7 @@ public class GenerateRestInteractionTaskTest {
     @Test
     public void GenerateRestInteractionOptions() throws ScreenPlayException, IOException {
         task.setTypeInteraction("Options");
+        task.setNameInteraction("prueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/Options.java").exists());
     }
@@ -69,6 +79,7 @@ public class GenerateRestInteractionTaskTest {
     @Test
     public void GenerateRestInteractionPut() throws ScreenPlayException, IOException {
         task.setTypeInteraction("Put");
+        task.setNameInteraction("prueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/Put.java").exists());
     }
@@ -76,6 +87,7 @@ public class GenerateRestInteractionTaskTest {
     @Test
     public void GenerateRestInteractionPatch() throws ScreenPlayException, IOException {
         task.setTypeInteraction("Patch");
+        task.setNameInteraction("prueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/main/java/co/com/bancolombia/certificacion/screen/interactions/Patch.java").exists());
     }
