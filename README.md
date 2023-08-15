@@ -95,7 +95,14 @@ also, there are 1 parameters optional `examples`
   gradle generateFeature --name=featureClassName --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
   gradle gft --name=featureClassName --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
 ```
-
+```bash
+   📂test
+   ┃   ┣ 📂java
+   ┃   ┗ 📂resources          
+   ┃     ┗ 📂features
+   ┃       ┗ 📂[nameSubFolder]
+             ┗ ![Ícono de Cucumber]('https://user-images.githubusercontent.com/102477169/187096400-3b052fba-e2d7-45a7-b820-a09447a11d52.svg') [nameSubFolder]
+```
 
 ## Generate Runners
 The **`generateRunner | grun`** task will generate runners classes inside runners package, this task has one required parameter `name`
@@ -108,20 +115,22 @@ The **`generateRunner | grun`** task will generate runners classes inside runner
 
 ## Generate Rest Interaction
 The **`generateRestInteraction | gri`** task will generate the rest interaction classes, this task has one required parameters `typeInteraction`
-- **`typeInteraction`** `= interaction`: This parameter is going to specify the type interaction to use. `field is required`
+- **`typeInteraction`** `= interaction`: This parameter is going to specify the type of interaction to use. `field is required`
+- **`nameInteraction`** `= Interaction`: This parameter is going to specify the name of interaction to use. `This field is required only when you choose` `GENERIC` `as type of interaction class`
 
 ```shell
-  gradle generateRestInteraction --typeInteraction=[typeInteraction] 
-  gradle gri --typeInteraction=[typeInteraction] 
+  gradle generateRestInteraction --typeInteraction=[typeInteraction] --nameInteraction=NameInteraction
+  gradle gri --typeInteraction=[typeInteraction] --nameInteraction=NameInteraction
 ```
 
-| Reference for **typeInteraction** | Name         |
-|-----------------------------------|--------------|
-| Post                              | Rest Post    |
-| Get                               | Rest Get     |
-| Options                           | Rest Options |
-| Patch                             | Rest Patch   |
-| Put                               | Rest Put     |
+| Reference for **typeInteraction** | Name                |
+|-----------------------------------|---------------------|
+| Generic                           | Generic interaction |
+| Post                              | Rest Post           |
+| Get                               | Rest Get            |
+| Options                           | Rest Options        |
+| Patch                             | Rest Patch          |
+| Put                               | Rest Put            |
 
 ## Generate Tasks
 The **`generateTask | gtk`** task will generate the Rest task or Ux class, this task has two required parameter `name` and `typeTask`
@@ -130,8 +139,8 @@ The **`generateTask | gtk`** task will generate the Rest task or Ux class, this 
 - **`method`** `= typeTask`: If you choose 'Rest' for the `typeTask` field, the 'method' field becomes mandatory, as it constructs the Task list for REST consumption. `field is required`
 
 ```shell
-  gradle generateTask --name=[nameTaskClass] --typeTask=[typeTask] --method[optionalField]
-  gradle gtk --name=[nameTaskClass] --typeTask=[typeTask] --method[optionalField]
+  gradle generateTask --name=[nameTaskClass] --typeTask=[typeTask] --method=[optionalField]
+  gradle gtk --name=[nameTaskClass] --typeTask=[typeTask] --method=[optionalField]
 ```
 
 | Reference for **typeTask** | Name      |

@@ -1,7 +1,6 @@
 package co.com.bancolombia.utils;
 
 import co.com.bancolombia.exceptions.ParamNotFoundException;
-import org.gradle.api.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +55,12 @@ public class Util {
     public static String capitalize(String data) {
         char[] c = data.toCharArray();
         c[0] = Character.toUpperCase(c[0]);
+        return new String(c);
+    }
+
+    public static String nocapitalize(String data) {
+        char[] c = data.toCharArray();
+        c[0] = Character.toLowerCase(c[0]);
         return new String(c);
     }
 

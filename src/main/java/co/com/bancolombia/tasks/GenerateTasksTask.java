@@ -52,7 +52,7 @@ public class GenerateTasksTask extends AbstracScreenPlayArchitectureDefaultTask{
         logger.lifecycle("Task Name: {}", name);
         logger.lifecycle("Task Type: {}", Util.capitalize(typeTask));
         builder.addParam("taskName", Util.capitalize(name));
-        builder.addParam("taskStatic", name.toLowerCase());
+        builder.addParam("taskStatic", Util.nocapitalize(name));
         if (flag){
             builder.addParam("method", Util.capitalize(method));
             builder.addParam("access", Util.validateMethod(method).get(0));

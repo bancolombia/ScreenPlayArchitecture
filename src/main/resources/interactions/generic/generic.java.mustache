@@ -1,0 +1,15 @@
+package {{package}}.interactions;
+
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Interaction;
+
+public class {{nameInteCapitalize}} implements Interaction{
+
+    @Override
+    public <T extends Actor> void performAs(T actor) {}
+
+    public static {{nameInteCapitalize}} {{nameInteLower}} () {
+        return new {{nameInteCapitalize}}();
+    }
+
+}

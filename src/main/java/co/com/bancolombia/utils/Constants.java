@@ -26,7 +26,7 @@ public class Constants {
         UX
     }
 
-    public static final String PLUGIN_VERSION = "1.1.0";
+    public static final String PLUGIN_VERSION = "1.0.0";
     public static final String BUILD_GRADLE = "./build.gradle";
     public static final String SERENITY_PROPERTIES = "./serenity.properties";
     public static final String BANCOLOMBIA_REPOSITORIES = "https://artifactory.apps.bancolombia.com/maven-bancolombia/";
@@ -35,7 +35,7 @@ public class Constants {
     public static final String LOMBOK_VERSION = "1.18.22";
     public static final String JUNIT = "4.13.2";
     public static final String HAMCREST = "1.3";
-    public static final List<String> INTERACTIONS = List.of(new String[]{"POST", "GET", "PUT", "OPTIONS", "PATCH"});
+    public static final List<String> INTERACTIONS = List.of(new String[]{"POST", "GET", "PUT", "OPTIONS", "PATCH", "GENERIC"});
     public static final List<String> TASKS = List.of(new String[]{"UX", "REST"});
 
 

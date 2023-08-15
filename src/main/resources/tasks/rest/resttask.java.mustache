@@ -21,10 +21,9 @@ public class {{taskName}} implements Task {
                         .{{data}}("")
             )
         );
-
     }
+
     public static {{taskName}} {{taskStatic}}() {
         return instrumented({{taskName}}.class);
     }
-
 }
