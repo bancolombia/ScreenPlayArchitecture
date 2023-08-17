@@ -13,7 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.gradle.api.Project;
 
 public class FileUtil {
-    private static final String GRADLE_PROPERTIES = "/gradle.properties";
 
     public static boolean exists(String dir, String file) {
         return Files.exists(Paths.get(dir, file));
@@ -46,15 +45,15 @@ public class FileUtil {
         }
     }
 
-    public static String readProperties(String projectPath, String variable) throws IOException {
+    public static String readProperties(String projectPath, String fileName, String variable) throws IOException {
         Properties properties = new Properties();
-        try (BufferedReader br = new BufferedReader(new FileReader(projectPath + GRADLE_PROPERTIES))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(projectPath + fileName))) {
             properties.load(br);
         }
         if (properties.getProperty(variable) != null) {
             return properties.getProperty(variable);
         } else {
-            throw new IOException("No parameter " + variable + " in gradle.properties file");
+            throw new IOException("No parameter " + variable + " in " + fileName + " file");
         }
     }
 

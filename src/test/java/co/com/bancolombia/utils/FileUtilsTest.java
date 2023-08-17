@@ -23,7 +23,8 @@ public class FileUtilsTest {
     @Test
     public void readPropertiesExist() throws IOException {
         String property = "package";
-        assertEquals("co.com.bancolombia", FileUtil.readProperties(".", property));
+        assertEquals("co.com.bancolombia",
+                FileUtil.readProperties(".", Constants.GRADLE_PROPERTIES, property));
     }
 
     @Test
