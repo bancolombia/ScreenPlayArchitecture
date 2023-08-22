@@ -145,11 +145,11 @@ public class ModuleBuilder {
         return mapper.readValue(targetString, TemplateDefinition.class);
     }
 
-    private String buildFromTemplate(String resource) {
+    private String buildFromTemplate(String resource) throws IOException {
         Mustache mustache = mustacheFactory.compile(resource);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, params);
-        return stringWriter.toString();
+        return stringWriter.toString().replace("&quot;", "\"");
     }
     public void addParamPackage(String packageName) {
         this.params.put("package", packageName.toLowerCase());
@@ -157,7 +157,8 @@ public class ModuleBuilder {
     }
     private void loadPackage() {
         try {
-            addParamPackage(FileUtil.readProperties(project.getProjectDir().getPath(), "package"));
+            addParamPackage(FileUtil.readProperties(project.getProjectDir().getPath(),
+                    Constants.GRADLE_PROPERTIES, "package"));
         } catch (IOException e) {
             logger.debug("cannot read package from gradle.properties");
         }
@@ -165,7 +166,7 @@ public class ModuleBuilder {
     private void loadLanguage() {
         String language = null;
         try {
-            language = FileUtil.readProperties(project.getProjectDir().getPath(), LANGUAGE);
+            language = FileUtil.readProperties(project.getProjectDir().getPath(), Constants.GRADLE_PROPERTIES, LANGUAGE);
         } catch (IOException e) {
             logger.debug("cannot read language from gradle.properties");
         }
@@ -179,7 +180,8 @@ public class ModuleBuilder {
         final String param = "example";
         try {
             this.params.put(
-                    param, "true".equals(FileUtil.readProperties(project.getProjectDir().getPath(), param)));
+                    param, "true".equals(FileUtil.readProperties(project.getProjectDir().getPath(),
+                            Constants.GRADLE_PROPERTIES, param)));
         } catch (IOException e) {
             logger.debug("cannot read example from gradle.properties");
             this.params.put(param, false);
