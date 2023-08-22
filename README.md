@@ -222,6 +222,21 @@ The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root p
    ┣ 📜[name]_Build.gradle
    ┗ 📜settings.gradle
 ```
+## Generate Critical Root
+The **`generateCriticalRoot | gcr`** task will generate the Json file that containing the critical path feature,
+this task has two required parameters `features` and `language`
+- **`features`** `= featureroot`: This parameter specify the feature root and name to extract the scenario separate for comma. `field is required`
+- **`language`** `= languageFeature`: This parameter specify the language used in the Gherkin language into the feature file. `field is required`
+
+```shell
+  gradle generateCriticalRoot --features=root/feature_one,root/feature_two --language=EN 
+  gradle gcr --features=root/feature_one,root/feature_two --language=EN
+```
+
+| Reference for **language** | Name    |
+|----------------------------|---------|
+| EN                         | English |
+| ES                         | Spanish |
 
 
 # How can I help?

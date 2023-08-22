@@ -2,6 +2,8 @@ package co.com.bancolombia.utils;
 
 import co.com.bancolombia.exceptions.ParamNotFoundException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,15 @@ public class Util {
                 + options.stream().map(Object::toString).sorted().collect(Collectors.joining("|"))
                 + "]";
     }
+
+    public static String getDate() {
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+        // Formatear la fecha en el formato "dd/mm/yyyy"
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return fechaActual.format(formato);
+    }
+
 
     public static String fillPath(String path, Map<String, Object> params) throws ParamNotFoundException{
 

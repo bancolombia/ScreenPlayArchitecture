@@ -145,11 +145,11 @@ public class ModuleBuilder {
         return mapper.readValue(targetString, TemplateDefinition.class);
     }
 
-    private String buildFromTemplate(String resource) {
+    private String buildFromTemplate(String resource) throws IOException {
         Mustache mustache = mustacheFactory.compile(resource);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, params);
-        return stringWriter.toString();
+        return stringWriter.toString().replace("&quot;", "\"");
     }
     public void addParamPackage(String packageName) {
         this.params.put("package", packageName.toLowerCase());

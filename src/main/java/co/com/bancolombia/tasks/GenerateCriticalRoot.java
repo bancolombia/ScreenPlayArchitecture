@@ -1,80 +1,93 @@
 package co.com.bancolombia.tasks;
 
+import co.com.bancolombia.exceptions.ParamNotFoundException;
 import co.com.bancolombia.exceptions.ScreenPlayException;
 import co.com.bancolombia.tasks.annotations.CATask;
 import co.com.bancolombia.utils.Constants;
 import co.com.bancolombia.utils.FileUtil;
 import co.com.bancolombia.utils.Util;
+import org.gradle.api.tasks.options.Option;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @CATask(name = "generateCriticalRoot", shortCut = "gcr", description = "Generate json critical root file")
 public class GenerateCriticalRoot extends AbstracScreenPlayArchitectureDefaultTask {
 
+    private String features;
+    private String language;
+
+    @Option(option = "features", description = "Set the features name to find in the project")
+    public void setFeatures(String listFeature) {
+        this.features = listFeature;
+    }
+    @Option(option = "language", description = "Set the Gherkin language used in the feature file")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     @Override
     public void execute() throws IOException, ScreenPlayException {
+
+        String step = Constants.STEPS.get(0);
+        String example = "Ejemplos:";
+        if (!Constants.LANGUAGE.contains(language.toUpperCase())) {
+            throw new IllegalArgumentException("The language is not valid, use EN -> English or ES -> Spanish");
+        }
+
+        if (language.equalsIgnoreCase("EN")) {
+            example = "Examples:";
+            step = Constants.STEPS.get(1);
+        }
+
         logger.lifecycle("ScreenPlay architecture plugin version: {}", Util.getVersionPlugin());
-        logger.lifecycle("Critical Root name: {}", Constants.CRITICAL_ROOT);
-        dataExtractor();
+        logger.lifecycle("Critical Root name: {}", Constants.CRITICAL_ROOT_NAME);
+        logger.lifecycle("Feature to create Critical Root");
+        builder.addParam("componentName", FileUtil.readProperties(builder.getProject().getProjectDir().getPath(), // Get the name of the project contained within the settings.gradle file
+                Constants.SETTINGS_GRADLE, "rootProject.name").replace("'", ""));
+        builder.addParam("rootName", Constants.CRITICAL_ROOT_NAME);
+        builder.addParam("date", Util.getDate());
+        builder.addParam("status", true);
+        builder.addParam("features", dataExtractor(List.of(features.split(",")), example, step));
+        builder.setupFromTemplate("criticalroot");
+        builder.persist();
     }
 
-    private void dataExtractor() throws IOException {
-        File[] featureSubFolder = builder.getProject().file("src/test/resources/features/").listFiles();
-        List<String> internFeatures = new ArrayList<>();
-        List<String> paths = new ArrayList<>();
-        List<String> subFolder = new ArrayList<>();
-        List<String> dataFile = new ArrayList<>();
+    private String dataExtractor(List<String> features, String example, String step) throws IOException {
+        String featureContent = "";
+        List<String> dataToSet = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        List<String> consolidate = new ArrayList<>();
         String scenario = "";
-        for (File subFolders : featureSubFolder) {
-            subFolder.add(subFolders.getName());
-            for(File features : subFolders.listFiles()) {
-                internFeatures.add(features.getName());
-                paths.add(subFolders.getName() + "/" + features.getName());
+        for (String pathFeature : features) {
+            int iterator = 0;
+            values.clear();
+            featureContent = FileUtil.readFile(
+                    builder.getProject(), "src/test/resources/features/" + pathFeature + ".feature");
+            if (!FileUtil.findMatches(featureContent, example).get(0).isEmpty()){
+                scenario = language.equalsIgnoreCase("EN") ? Constants.SCENARIOS.get(3):Constants.SCENARIOS.get(2);
+            }else {
+                scenario = language.equalsIgnoreCase("ES") ? Constants.SCENARIOS.get(1):Constants.SCENARIOS.get(0);
             }
-        }
-        for (String scen : paths){
-            scenario = FileUtil.readFile(builder.getProject(), "src/test/resources/features/" + scen);
-            int i = 0;
-            while (this.findMatches(scenario, "Scenario").get(1).size() >= i + 1){
-                String values = scenario.substring(
-                        this.findMatches(scenario, "Scenario").get(1).get(i),
-                        this.findMatches(scenario, "Given").get(0).get(i)
-                ).replace(":", "").trim();
-                dataFile.add(values);
-                i++;
+            while (FileUtil.findMatches(featureContent, scenario).get(0).size() >= iterator + 1) {
+                values.add("\"" + featureContent.substring(
+                                FileUtil.findMatches(featureContent, scenario).get(1).get(iterator),
+                                FileUtil.findMatches(featureContent, step).get(0).get(iterator))
+                        .replace(":", "").trim() + "\"");
+                iterator++;
             }
-
+            consolidate.add(pathFeature.substring(pathFeature.indexOf("/") + 1) + values.toString());
         }
-
-
+        for (String s : consolidate) {
+            dataToSet.add(stringBuilder(s.substring(s.indexOf("[")),
+                    s.substring(0, s.indexOf("["))));
+        }
+        return dataToSet.toString();
     }
 
-    private List<List<Integer>> findMatches(String file, String patternToFind) {
-        // Compila el patrón en un objeto Pattern
-        Pattern pattern = Pattern.compile(patternToFind);
-
-        // Crea un objeto Matcher para el texto y el patrón
-        Matcher matcher = pattern.matcher(file);
-
-        // Listas para almacenar los índices de inicio y fin de las coincidencias
-        List<Integer> indicesInicio = new ArrayList<>();
-        List<Integer> indicesFin = new ArrayList<>();
-
-        // Encuentra todas las coincidencias y almacena los índices
-        while (matcher.find()) {
-            int inicio = matcher.start(); // Índice de inicio de la coincidencia
-            int fin = matcher.end();       // Índice de fin de la coincidencia
-            indicesInicio.add(inicio);
-            indicesFin.add(fin);
-        }
-        List<List<Integer>> index = new ArrayList<>();
-        index.add(indicesInicio);
-        index.add(indicesFin);
-        return index;
+    private String stringBuilder(String data, String featureName) {
+        return "{ \"nombre_feature\": \"" + featureName + ".feature\", \"escenarios\": " + data +" }";
     }
+
+
 }
