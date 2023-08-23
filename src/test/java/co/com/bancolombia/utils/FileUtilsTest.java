@@ -13,6 +13,7 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -61,6 +62,15 @@ public class FileUtilsTest {
         String response = FileUtil.readFile(project, "temp.txt");
 
         assertEquals("hello", response);
+    }
+    
+    @Test
+    public void findMatches() throws IOException {
+        Project project =
+                ProjectBuilder.builder().withProjectDir(new File("src/test/resources")).build();
+        List<List<Integer>> response = FileUtil.findMatches(
+                (FileUtil.readFile(project,"temp.txt")), "hello");
+        assertEquals(1, response.get(0).size());
     }
 
     public static void deleteStructure(Path sourcePath) {

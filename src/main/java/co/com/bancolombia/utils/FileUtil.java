@@ -79,20 +79,20 @@ public class FileUtil {
     }
 
     public static List<List<Integer>> findMatches(String file, String patternToFind) {
-        // Compila el patrón en un objeto Pattern
+        // Compile the pattern into a pattern object
         Pattern pattern = Pattern.compile(patternToFind);
 
-        // Crea un objeto Matcher para el texto y el patrón
+        // Create a Matcher Object for the text an the pattern
         Matcher matcher = pattern.matcher(file);
 
-        // Listas para almacenar los índices de inicio y fin de las coincidencias
+        // List for saving the start and end indexes for matches
         List<Integer> indicesInicio = new ArrayList<>();
         List<Integer> indicesFin = new ArrayList<>();
 
-        // Encuentra todas las coincidencias y almacena los índices
+        // find all matches and save the indexes
         while (matcher.find()) {
-            int inicio = matcher.start(); // Índice de inicio de la coincidencia
-            int fin = matcher.end();       // Índice de fin de la coincidencia
+            int inicio = matcher.start(); // Match star index
+            int fin = matcher.end();       // Match end index
             indicesInicio.add(inicio);
             indicesFin.add(fin);
         }
