@@ -243,4 +243,4 @@ this task has two required parameters `features` and `language`
 Review the issues, we hear new ideas. Read more [Contributing](https://github.com/bancolombia/)
 
 # Whats Next?
-Read more  [About Clean Architecure](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+Read more  [About ScreenPlay Architecure]()

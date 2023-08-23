@@ -3,6 +3,8 @@ package co.com.bancolombia.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +32,13 @@ public class UtilTest {
 
         Assert.assertEquals("capitalize", Util.nocapitalize(test1));
         Assert.assertEquals("capitalizeTest", Util.nocapitalize(test2));
+    }
+    @Test
+    public void getDate() {
+        LocalDate fechaActual = LocalDate.now();
+        // Formatear la fecha en el formato "dd/mm/yyyy"
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Assert.assertEquals(fechaActual.format(formato), Util.getDate());
     }
     @Test
     public void shouldJoinPath() {
