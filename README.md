@@ -11,6 +11,7 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
   - [Generate Rest Interaction](#generate-rest-interaction)
   - [Generate Tasks](#generate-tasks)
   - [Generate Pipeline](#generate-pipeline)
+  - [Generate Critical Root](#generate-critical-root)
 - [How can I help?](#how-can-i-help)
 - [Whats Next?](#whats-next)
 
@@ -18,7 +19,7 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
 
 # Plugin implementation 
 
-To use the [plugin](#) you need Gradle version 7.4 or later, to start add the following section into your
+To use the [plugin](#) you need Gradle version 8.6 or later, to start add the following section into your
 **build.gradle** file.
 
 ```groovy
@@ -33,7 +34,7 @@ echo "plugins {
 }" > build.gradle
 ```
 # Tasks
-The Scaffolding ScreenPlay Architecture plugin will allow you run 4 tasks:
+The Scaffolding ScreenPlay Architecture plugin will allow you run 5 tasks:
 
 ## Generate Project
 
@@ -225,12 +226,13 @@ The **`generatePipeline | gpl`** task will generate CI/CD pipeline inside root p
 ## Generate Critical Root
 The **`generateCriticalRoot | gcr`** task will generate the Json file that containing the critical path feature,
 this task has two required parameters `features` and `language`
+- **`componentName`** `= component_name_test`: This parameter specify the project component name  `field is optional`
 - **`features`** `= featureroot`: This parameter specify the feature root and name to extract the scenario separate for comma. `field is required`
 - **`language`** `= languageFeature`: This parameter specify the language used in the Gherkin language into the feature file. `field is required`
 
 ```shell
-  gradle generateCriticalRoot --features=root/feature_one,root/feature_two --language=EN 
-  gradle gcr --features=root/feature_one,root/feature_two --language=EN
+  gradle generateCriticalRoot --componentName=component_test --features=root/feature_one,root/feature_two --language=EN 
+  gradle gcr --componentName=component_test --features=root/feature_one,root/feature_two --language=EN
 ```
 
 | Reference for **language** | Name    |
