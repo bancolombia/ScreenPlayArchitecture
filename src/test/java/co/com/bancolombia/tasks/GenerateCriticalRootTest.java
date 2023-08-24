@@ -67,6 +67,7 @@ public class GenerateCriticalRootTest {
     @Test
     public void generateRootWithExamplesEn() throws ScreenPlayException, IOException {
         createFeatures("feature_example", "examples", "true");
+        task.setComponentName("prueba_test");
         task.setFeatures("examples/feature_example");
         task.setLanguage("EN");
         task.execute();
@@ -77,6 +78,7 @@ public class GenerateCriticalRootTest {
     public void generateRootSomeFeEn() throws ScreenPlayException, IOException {
         createFeatures("multiple", "examples", "true");
         createFeatures("test_multiple", "examplesmultimples", "true");
+        task.setComponentName("modulos_test");
         task.setFeatures("examples/multiple,examplesmultimples/test_multiple");
         task.setLanguage("EN");
         task.execute();
