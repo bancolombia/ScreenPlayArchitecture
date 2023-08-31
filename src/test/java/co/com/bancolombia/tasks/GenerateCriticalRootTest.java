@@ -79,7 +79,7 @@ public class GenerateCriticalRootTest {
         createFeatures("multiple", "examples", "true");
         createFeatures("test_multiple", "examplesmultimples", "true");
         task.setComponentName("modulos_test");
-        task.setFeatures("examples/multiple,examplesmultimples/test_multiple");
+        task.setFeatures("examples/multiple, examplesmultimples/test_multiple");
         task.setLanguage("EN");
         task.execute();
         assertTrue(new File("build/unitTest/rutacritica.json").exists());
