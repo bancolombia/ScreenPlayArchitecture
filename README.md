@@ -44,6 +44,7 @@ If you run this task on an existing project it will override the `build.gradle` 
   - **`projectName`** `= ProjectName`: This parameter is going to specify name of the project. `Default value = Screenplay_architecture`
   - **`groupId`** `= <your.company.domain>`: You can specify your domain, this parameter going to use for package structure. `Default value = co.com.bancolombia.certificacion`
   - **`principalPackage`** `= package container`: This parameter going to like package container and is a complement for groupId. `Default value = screen`
+  - **`type`** `= choose between Rest or Ux Automation`: This parameter going to specify type automation will be create. `Default value = UX`
 
 
 ```shell
@@ -88,13 +89,13 @@ gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certific
 ## Generate Features
 The **`generateFeature | gft`** task will generate feature files inside features folder, this task has two required parameter `name` and `nameSubFolder`
 also, there are 1 parameters optional `examples`   
-- **`name`** `= NameFeature`: This parameter is going to specify the name of the feature class. `field is required`
+- **`name`** `= name_feature`: This parameter is going to specify the name of the feature class. `field is required`
 - **`examples`** `= true`: This parameter is going to specify if Scenario Outline are needed. `field for default is false`
 - **`nameSubFolder`** `= nameSubFolder`: This parameter is going to specify the name of the subfolder that will contain the feature files. `field is requered.`
 
 ```shell
-  gradle generateFeature --name=featureClassName --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
-  gradle gft --name=featureClassName --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
+  gradle generateFeature --name=feature_name --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
+  gradle gft --name=feature_name --nameSubFolder=[nameSubFolder] --examples=[optionalBoolValue] 
 ```
 ```bash
    📂test
@@ -102,16 +103,17 @@ also, there are 1 parameters optional `examples`
    ┃   ┗ 📂resources          
    ┃     ┗ 📂features
    ┃       ┗ 📂[nameSubFolder]
-   ┃         ┗ 📜[name].feature
+   ┃         ┗ 📜[feature_name].feature
 ```
 
 ## Generate Runners
 The **`generateRunner | grun`** task will generate runners classes inside runners package, this task has one required parameter `name`
 - **`name`** `= NameRunner`: This parameter is going to specify the name of the runner class. `field is required`
+- **`folderName`** `= package name`: This parameter is going to specify the name of the package that will contain the runners classes. `field is required`
 
 ```shell
-  gradle generateRunner --name=runnerClassName
-  gradle grun --name=runnerClassName
+  gradle generateRunner --name=runnerClassName --folderName=runnerspackage
+  gradle grun --name=runnerClassName --folderName=runnerspackage
 ```
 ```bash
 
@@ -123,7 +125,8 @@ The **`generateRunner | grun`** task will generate runners classes inside runner
 ┃   ┃       ┗ 📂certificacion
 ┃   ┃         ┗ 📂[principalPackage]
 ┃   ┃           ┣ 📂runners
-┃   ┃           ┃ ┗ 📜[name].java
+┃   ┃           ┃ ┗ 📂[runnerspackage]
+┃   ┃           ┃   ┗ 📜[name].java
 
 ```
 
@@ -134,8 +137,8 @@ The **`generateRestInteraction | gri`** task will generate the rest interaction 
 - **`nameInteraction`** `= Interaction`: This parameter is going to specify the name of interaction to use. `This field is required only when you choose` `GENERIC` `as type of interaction class`
 
 ```shell
-  gradle generateRestInteraction --typeInteraction=[typeInteraction] --nameInteraction=NameInteraction
-  gradle gri --typeInteraction=[typeInteraction] --nameInteraction=NameInteraction
+  gradle generateRestInteraction --typeInteraction=[typeInteraction]
+  gradle gri --typeInteraction=[typeInteraction] 
 ```
 
 | Reference for **typeInteraction** | Name                |

@@ -54,17 +54,6 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
     }
 
 
-    /*
-
-    @OptionValues("language")
-    public List<Language> getLanguage(Language language) { return Arrays.asList(Language.values()); }
-
-    @OptionValues("javaVersion")
-    public List<JavaVersion> getJavaVersion(JavaVersion javaVersion) { return Arrays.asList(JavaVersion.values()); }
-
-    @OptionValues("force")
-    public List<BooleanOption> getForce(BooleanOption force) { return Arrays.asList(BooleanOption.values()); }*/
-
     @Override
     public void execute() throws IOException, ScreenPlayException {
         logger.lifecycle("ScreenPlay architecture plugin version: {}" , Util.getVersionPlugin());

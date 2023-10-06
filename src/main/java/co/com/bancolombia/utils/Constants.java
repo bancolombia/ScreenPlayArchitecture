@@ -32,6 +32,8 @@ public class Constants {
     public static final String SERENITY_PROPERTIES = "./serenity.properties";
     public static final String BANCOLOMBIA_REPOSITORIES = "https://artifactory.apps.bancolombia.com/maven-bancolombia/";
     public static final String SERENITY_VERSION = "3.9.8";
+    public static final String SERENITY_REST_LIBRARY = "";
+    public static final String SERENITY_UX_LIBRARY = "";
     public static final String SERENITY_CUCUMBER_VERSION = "3.9.8";
     public static final String LOMBOK_VERSION = "1.18.22";
     public static final String JUNIT = "4.13.2";
