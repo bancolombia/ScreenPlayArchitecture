@@ -46,8 +46,9 @@ public class GenerateRunnerTaskTest {
     @Test
     public void generateRunner() throws ScreenPlayException, IOException {
         task.setName("ConsumerUnitTest");
+        task.setFolderName("packageprueba");
         task.execute();
         assertTrue(new File("build/unitTest/src/test/java/co/com/bancolombia/certificacion" +
-                "/screen/runners/ConsumerUnitTest.java").exists());
+                "/screen/runners/packageprueba/ConsumerUnitTest.java").exists());
     }
 }

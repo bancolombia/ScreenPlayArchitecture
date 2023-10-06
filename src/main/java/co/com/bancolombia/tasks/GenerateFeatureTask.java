@@ -39,7 +39,7 @@ public class GenerateFeatureTask extends AbstracScreenPlayArchitectureDefaultTas
         logger.lifecycle("ScreenPlay architecture plugin version: {}", Util.getVersionPlugin());
         logger.lifecycle("Feature name: {}", name);
         logger.lifecycle("Implement Scenario Outline {}", examples);
-        builder.addParam("featureName", name.toLowerCase());
+        builder.addParam("featureName", name);
         if (nameSubFolder != null) {
             builder.addParam("subfolder", nameSubFolder.toLowerCase());
             setupToExecute("features/subfolder");
