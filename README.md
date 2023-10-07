@@ -13,7 +13,7 @@ Gradle plugin to create a java application based on ScreenPlay Architecture foll
   - [Generate Pipeline](#generate-pipeline)
   - [Generate Critical Root](#generate-critical-root)
 - [How can I help?](#how-can-i-help)
-- [Whats Next?](#whats-next)
+- [What's Next?](#whats-next)
 
 
 
