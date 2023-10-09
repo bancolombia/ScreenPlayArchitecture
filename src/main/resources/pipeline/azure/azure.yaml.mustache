@@ -12,9 +12,11 @@ trigger:
   paths:
     include:
       - '**/*'
+
 pool:
   name: Build
   demands: java
+
 steps:
   - task: SonarQubePrepare@4
     displayName: 'Prepare analysis on SonarQube'
@@ -30,6 +32,7 @@ steps:
         sonar.java.binaries=**/build/classes
         sonar.java.libraries=**/build/libs
         sonar.exclusions = **/*.gradle, **/*.json, **/*.xml, **/*.yaml
+
   - task: Gradle@2
     displayName: 'Gradlew'
     inputs:
@@ -37,13 +40,17 @@ steps:
       workingDirectory: '$(componentName)/$(subComponentName)'
       tasks: 'clean build -x test'
       publishJUnitResults: false
+      jdkVersionOption: 1.11
     continueOnError: true
+
   - task: SonarQubeAnalyze@4
     displayName: 'Run Code Analysis'
+
   - task: sonar-buildbreaker@8
     displayName: 'Break build on quality gate failure'
     inputs:
       SonarQube: SonarQube
+
   - task: CopyFiles@2
     displayName: 'Copy Files'
     inputs:
@@ -53,6 +60,7 @@ steps:
         !build
       TargetFolder: '$(build.artifactstagingdirectory)'
       CleanTargetFolder: true
+
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: $(AW)_$(repo)_$(componentName)'
     inputs:
