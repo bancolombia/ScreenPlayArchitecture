@@ -34,7 +34,7 @@ echo "plugins {
 }" > build.gradle
 ```
 # Tasks
-The Scaffolding ScreenPlay Architecture plugin will allow you run 5 tasks:
+The Scaffolding ScreenPlay Architecture plugin will allow you run 7 tasks:
 
 ## Generate Project
 
