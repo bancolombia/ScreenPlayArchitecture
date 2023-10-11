@@ -66,6 +66,10 @@ public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectu
         builder.addParam("projectName", projectName);
         builder.addParam("principalPackage", principalPackage);
         builder.addParam("language", language.name().toLowerCase());
+        builder.addParam("libreryToUse", type.equals(ProjectType.UX) ?
+                Constants.SERENITY_UX_LIBRARY:Constants.SERENITY_REST_LIBRARY);
+        builder.addParam("webDriverV", type.equals(ProjectType.UX) ? Constants.SERENITY_WEBDRIVER_VERSION:"");
+        builder.addParam("webDriverLibrary", type.equals(ProjectType.UX) ? Constants.SERENITY_WEBDRIVER:"");
         builder.addParam("javaVersion", javaVersion);
         builder.addParam("java11", javaVersion == Constants.Java11);
         builder.addParam("remoteRepository", Constants.BANCOLOMBIA_REPOSITORIES);

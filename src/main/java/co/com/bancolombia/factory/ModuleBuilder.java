@@ -149,7 +149,8 @@ public class ModuleBuilder {
         Mustache mustache = mustacheFactory.compile(resource);
         StringWriter stringWriter = new StringWriter();
         mustache.execute(stringWriter, params);
-        return stringWriter.toString().replace("&quot;", "\"");
+        return stringWriter.toString().replace("&quot;", "\"")
+                .replace("&#39;", "'").replace("&#61;", "=");
     }
     public void addParamPackage(String packageName) {
         this.params.put("package", packageName.toLowerCase());

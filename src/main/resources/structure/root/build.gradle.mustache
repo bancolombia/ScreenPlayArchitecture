@@ -36,20 +36,22 @@ ext {
     lombokVersion = '{{versionLoom}}'
     junit = '{{junitV}}'
     hamcrest = '{{hamcrestV}}'
+    {{webDriverV}}
 }
 
 dependencies {
     implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
     implementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
     implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
-    implementation "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
     implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    implementation "{{libreryToUse}}"
 
     //Test compilation
     testImplementation "junit:junit:$rootProject.ext.junit"
     testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrest"
+    {{webDriverLibrary}}
 
-    //Lombok dependencies
+//Lombok dependencies
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor  "org.projectlombok:lombok:${lombokVersion}"
     testCompileOnly  "org.projectlombok:lombok:${lombokVersion}"
