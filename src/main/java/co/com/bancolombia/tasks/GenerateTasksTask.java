@@ -32,16 +32,19 @@ public class GenerateTasksTask extends AbstracScreenPlayArchitectureDefaultTask{
         if (!name.isEmpty() && !typeTask.isEmpty() && Constants.TASKS.contains(typeTask.toUpperCase())) {
             if (typeTask.equalsIgnoreCase("ux")){
                 validateOperation(false);
-            }else if (typeTask.equalsIgnoreCase("rest") && (!method.isEmpty() && Constants.INTERACTIONS.contains(method.toUpperCase()))){
+            }else if (typeTask.equalsIgnoreCase("rest") && (!method.isEmpty() &&
+                    Constants.INTERACTIONS.contains(method.toUpperCase()))){
                 validateOperation(true);
             }else{
-                throw new IllegalArgumentException("The class name and type are necessary: use gradle generateTask --name[nameClass] --type[typeClass] \n" +
+                throw new IllegalArgumentException("The class name and type are necessary: use gradle generateTask" +
+                        " --name[nameClass] --type[typeClass] \n" +
                         "Keep in mind that if you choose a class of type 'rest', the 'method' field is mandatory: \n" +
                         "use gradle generateTask --name[nameClass] --type[typeClass] --method=[methodRestToUse]");
             }
             builder.persist();
         }else{
-            throw new IllegalArgumentException("The class name and type are necessary: use gradle generateTask --name[nameClass] --type[typeClass] \n" +
+            throw new IllegalArgumentException("The class name and type are necessary: use gradle generateTask" +
+                    " --name[nameClass] --type[typeClass] \n" +
                     "Keep in mind that if you choose a class of type 'rest', the 'method' field is mandatory: \n" +
                     "use gradle generateTask --name[nameClass] --type[typeClass] --method=[methodRestToUse]");
         }

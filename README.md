@@ -44,12 +44,12 @@ If you run this task on an existing project it will override the `build.gradle` 
   - **`projectName`** `= ProjectName`: This parameter is going to specify name of the project. `Default value = Screenplay_architecture`
   - **`groupId`** `= <your.company.domain>`: You can specify your domain, this parameter going to use for package structure. `Default value = co.com.bancolombia.certificacion`
   - **`principalPackage`** `= package container`: This parameter going to like package container and is a complement for groupId. `Default value = screen`
-  - **`type`** `= choose between Rest or Ux Automation`: This parameter going to specify type automation will be create. `Default value = UX`
+  - **`type`** `= choose between REST or UX`: This parameter going to specify type automation will be create. `Default value = UX`
 
 
 ```shell
-gradle screenPlayArchitecture --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba
-gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba
+gradle screenPlayArchitecture --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba --type=REST
+gradle spa --projectName=Team_moduloPrueba --groupId=co.com.bancolombia.certificacion --principalPackage=moduloprueba --type=REST
 ```
 
 **_The structure will look like this for java:_**
@@ -234,8 +234,8 @@ this task has two required parameters `features` and `language`
 - **`language`** `= languageFeature`: This parameter specify the language used in the Gherkin language into the feature file. `field is required`
 
 ```shell
-  gradle generateCriticalRoot --componentName=component_test --features=root/feature_one,root/feature_two --language=EN 
-  gradle gcr --componentName=component_test --features=root/feature_one,root/feature_two --language=EN
+  gradle generateCriticalRoot --componentName=component_test --features=root/feature_one, root/feature_two --language=EN 
+  gradle gcr --componentName=component_test --features=root/feature_one, root/feature_two --language=EN
 ```
 
 | Reference for **language** | Name    |
