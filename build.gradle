@@ -6,14 +6,24 @@ plugins {
 
 }
 
-ext {
-    bcRepo = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
-    bcPluginName = 'Scaffold ScreanPlay Architecture Bancolombia'
-    bcPluginDescription = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
-}
-
 group = 'co.com.bancolombia.screenplayarchitecture'
 version = '1.0.0'
+
+gradlePlugin {
+
+    website = 'https://github.com/bancolombia/ScreenPlayArchitecture'
+    vcsUrl = 'https://github.com/bancolombia/ScreenPlayArchitecture'
+    
+    plugins {
+        screenplayarchitecture {
+            id = 'co.com.bancolombia.screenplayarchitecture'
+			displayName = 'Scaffold ScreanPlay Architecture Bancolombia'
+			description = 'Gradle plugin to create a test application in Java that already works, It follows our best practices!'
+			implementationClass = 'co.com.bancolombia.PluginScreenPlay'
+            tags.set(['scaffold', 'screenplayarchitecture', 'Bancolombia', 'OpenSource'])
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -106,21 +116,6 @@ if (project.hasProperty('signing.keyId')) { // publish as library in maven centr
         }
     }
 
-    gradlePlugin {
-        // Define the plugin
-        website = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
-        vcsUrl = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
-
-        plugins {
-            cleanArchitecture {
-                id = 'co.com.bancolombia.screenplayarchitecture'
-                displayName = bcPluginName
-                description = bcPluginDescription
-                implementationClass = 'co.com.bancolombia.PluginScreenPlay'
-                tags.set(['scaffold', 'screenplayarchitecture', 'Bancolombia', 'OpenSource'])
-            }
-        }
-    }
 }
 
 publishing {
@@ -132,22 +127,6 @@ publishing {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
-        }
-    }
-}
-
-gradlePlugin {
-    // Define the plugin
-    website = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
-    vcsUrl = 'https://github.com/JuniorMM12/ScreenPlayArchitecture'
-
-    plugins {
-        cleanArchitecture {
-            id = 'co.com.bancolombia.screenplayarchitecture'
-            displayName = bcPluginName
-            description = bcPluginDescription
-            implementationClass = 'co.com.bancolombia.PluginScreenPlay'
-            tags.set(['scaffold', 'screenplayarchitecture', 'Bancolombia', 'OpenSource'])
         }
     }
 }
