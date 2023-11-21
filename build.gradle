@@ -136,6 +136,10 @@ compileJava {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+test {
+    exclude '**/*Test.class'
+}
+
 dependencies {
     api 'com.github.spullara.mustache.java:compiler:0.9.10'
     api 'commons-io:commons-io:2.12.0'
