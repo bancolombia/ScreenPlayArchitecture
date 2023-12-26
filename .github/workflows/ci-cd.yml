@@ -25,7 +25,7 @@ jobs:
       with:
         arguments: build
 
-    # Publicar plugin
+    # Publicar plugins
     - name: Publish Plugin
       #if: github.ref == 'refs/heads/trunk' && github.event_name == 'push'
       env:
