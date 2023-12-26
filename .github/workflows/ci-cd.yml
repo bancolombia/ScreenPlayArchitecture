@@ -5,6 +5,7 @@ on:
     branches: [ "trunk" ]
   pull_request:
     branches: [ "trunk" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,9 +25,9 @@ jobs:
       with:
         arguments: build
 
-    # Publicar plugin
+    # Publicar plugins
     - name: Publish Plugin
-      if: github.ref == 'refs/heads/trunk' && github.event_name == 'push'
+      #if: github.ref == 'refs/heads/trunk' && github.event_name == 'push'
       env:
         GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
         GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
