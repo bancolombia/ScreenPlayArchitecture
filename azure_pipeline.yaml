@@ -1,0 +1,110 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: $(Build.SourceBranchName).$(date:yyyyMMdd)$(rev:.r)
+
+trigger:
+  branches:
+    include:
+      - trunk
+      - feature/*
+
+variables:
+  - group: 'oss-scaffold'
+
+resources:
+  - repo: self
+    clean: true
+
+pool:
+  name: Build
+  demands:
+    - Agent.OS -equals Linux
+    - java
+    - npm
+
+steps:
+  - task: SonarQubePrepare@5
+    inputs:
+      SonarQube: 'SonarQube'
+      scannerMode: 'CLI'
+      configMode: manual
+      cliProjectKey: '$(Build.Repository.Name)'
+      cliProjectName: '$(Build.Repository.Name)'
+      cliProjectVersion: '$(Build.BuildNumber)'
+
+  - task: Gradle@3
+    displayName: 'Compilación y ejecución de pruebas unitarias'
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      tasks: 'clean build jacocoTestReport'
+      publishJUnitResults: true
+      testResultsFiles: 'build/**/TEST-*.xml'
+      javaHomeOption: 'Path'
+      jdkDirectory: '$(JAVA_HOME_11_X64)'
+      sonarQubeRunAnalysis: true
+      sqGradlePluginVersionChoice: 'build'
+      spotBugsAnalysis: false
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFiles: '$(Build.SourcesDirectory)/build/test-results/test/TEST-*.xml'
+
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage from'
+    inputs:
+      summaryFileLocation: '$(Build.SourcesDirectory)/build/jacoco/test.exec'
+
+  - task: sonar-buildbreaker@8
+    inputs:
+      SonarQube: 'SonarQube'
+
+
+  - task: NodeTool@0
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'))
+    displayName: 'Setup NodeJS'
+    inputs:
+      versionSource: 'fromFile'
+      versionFilePath: '.nvmrc'
+
+  - task: Npm@1
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'))
+    displayName: 'Install Semantic Version'
+    inputs:
+      command: 'custom'
+      customCommand: 'install -g @semantic-release/exec semantic-release'
+
+  - task: Bash@3
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'))
+    displayName: 'Semantic Version'
+    inputs:
+      targetType: 'inline'
+      script: 'semantic-release'
+    env:
+      GH_TOKEN: $(System.AccessToken)
+      GIT_AUTHOR_NAME: semantic-release-bot
+      GIT_AUTHOR_EMAIL: semantic-release-bot@bancolombia.com.co
+      GIT_COMMITTER_NAME: semantic-release-bot
+      GIT_COMMITTER_EMAIL: semantic-release-bot@bancolombia.com.co
+
+  - task: JFrogGradle@1
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'), eq(variables['release'], 'true'))
+    displayName: 'Artifactory Gradle'
+    inputs:
+      gradleBuildFile: 'build.gradle'
+      artifactoryDeployerService: JfrogArtifactory
+      targetRepo: 'maven-bancolombia'
+      useWrapper: true
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+
+  - pwsh: |
+      az extension add --name azure-devops
+      az pipelines variable-group variable update --group-id 12575 --name oss-version --value "$(oss-new-version)" --organization "https://dev.azure.com/GrupoBancolombia" --project "Vicepresidencia Servicios de Tecnología"
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/trunk'), eq(variables['release'], 'true'))
+    displayName: 'Set current used oss-release'

@@ -22,7 +22,7 @@ import java.nio.file.Path;
         description = "Scaffolding ScreenPlay architecture project"
 )
 public class GenerateArchitectureDefaultTask extends AbstracScreenPlayArchitectureDefaultTask{
-    private String groupId = "co.com.bancolombia.certificacion";
+    private String groupId = "co.com.organization.test";
     private ProjectType type = ProjectType.UX;
     private String projectName = "Screenplay_architecture";
     private String principalPackage = "screen";

@@ -50,8 +50,8 @@ if (project.hasProperty('signing.keyId')) { // publish as library in maven centr
                     developers {
                         developer {
                             id = "jumosqu"
-                            name = "juniormosquera12@gmail.com"
-                            email = "juniormosquera12@gmail.com"
+                            name = "Junior Mosquera"
+                            email = "jumosqu@bancolombia.com.co"
                         }
                     }
                     scm {
@@ -107,7 +107,7 @@ if (project.hasProperty('signing.keyId')) { // publish as library in maven centr
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/bancolombia/scaffold-clean-architecture")
+                url = uri("https://github.com/bancolombia/ScreenPlayArchitecture")
                 credentials {
                     username = System.getenv("GITHUB_ACTOR")
                     password = System.getenv("GITHUB_TOKEN")
@@ -122,7 +122,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/bancolombia/scaffold-clean-architecture")
+            url = uri("https://github.com/bancolombia/ScreenPlayArchitecture")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -136,9 +136,7 @@ compileJava {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-test {
-    exclude '**/*Test.class'
-}
+
 
 dependencies {
     api 'com.github.spullara.mustache.java:compiler:0.9.10'
